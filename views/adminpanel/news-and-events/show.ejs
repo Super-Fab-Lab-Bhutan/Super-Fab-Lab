@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs') %>
+
+    <div class="container">
+
+        <h1>News and Events</h1>
+        <a href="/admin/news-and-events/new" class="btn btn-info btn-small">Add new</a>
+        <p>
+        <div class="row">
+            <% for(let i of news){ %>
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card mx-auto" style="width: 20rem;">
+                        <img src="<%= i.image%>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=i.title%>
+                            </h5>
+                
+
+                                        <span class="card-text">Description: <%=i.description%><br>
+
+                                                </b>
+                                        </span>
+                                        <br>
+                                        <a href="/admin/news-and-events/<%= i._id %>/edit"
+                                            class="btn btn-info btn-small">Edit</a>
+
+                                        <form class="d-inline-block"
+                                            action="/admin/news-and-events/<%= i.id %>?_method=DELETE" method="POST">
+                                            <button class="btn btn-danger btn-small">Delete</button>
+                                        </form>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+        </div>
+    </div>

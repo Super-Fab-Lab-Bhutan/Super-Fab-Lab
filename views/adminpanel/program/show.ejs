@@ -1,0 +1,72 @@
+<%- include('../partials/header.ejs') %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div class="container">
+  <h1>Programs</h1>
+  <a href="/admin/program/new" class="btn btn-info btn-small">Add new</a>
+  <p></p>
+
+  <p>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a id="a" class="nav-link active" href="/admin/program">All</a>
+      </li>
+      <li class="nav-item">
+        <a id="e" class="nav-link" href="/admin/education">Education</a>
+      </li>
+      <li class="nav-item">
+        <a id="r" class="nav-link" href="/admin/research">Research</a>
+      </li>
+      <li class="nav-item">
+        <a id="t" class="nav-link" href="/admin/training">Training</a>
+
+    </ul>
+  </div>
+
+
+
+
+
+  <div class="row">
+    <% for(let i of program){ %>
+    <div class="col-lg-4 col-md-6 mb-3">
+      <div class="card mx-auto" style="width: 20rem">
+        <img src="<%= i.image %>" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title"><%=i.title%></h5>
+
+          <p class="card-text"><%=i.description%></p>
+          <br />
+          <a href="/admin/program/<%= i._id %>/edit" class="btn btn-info btn-small">Edit</a>
+
+          <form class="d-inline-block" action="/admin/program/<%= i.id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-small">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%}%>
+
+  
+  <%if(all){%>
+<script>
+$(".nav-link").removeClass("active");
+$("#a").addClass("active");
+</script>
+<%}else if(program[0].type=="Training" ){%>
+<script>
+$(".nav-link").removeClass("active");
+$("#t").addClass("active");
+</script>
+<%}else if(program[0].type=="Education" ){%>
+<script>
+$(".nav-link").removeClass("active");
+$("#e").addClass("active");
+</script>
+<%}else if(program[0].type=="Research" ){%>
+<script>
+$(".nav-link").removeClass("active");
+$("#r").addClass("active");
+</script>
+<%}%>

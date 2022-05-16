@@ -1,0 +1,115 @@
+<%- include('../partials/header.ejs') %>
+<div>
+  <h1>Bookings
+</div>
+
+<div >
+  <table class="table table-sm table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">09:00-10:00</th>
+        <th scope="col">10:00-11:00</th>
+        <th scope="col">11:00-12:00</th>
+        <th scope="col">12:00-01:00</th>
+        <th scope="col">01:00-02:00</th>
+        <th scope="col">02:00-03:00</th>
+        <th scope="col">03:00-04:00</th>
+        <th scope="col">04:00-05:00</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% for(let i in booking){ %>
+      <tr>
+        <td scope="row">
+          <%if( booking[i].time=="09:00-10:00"){ %>
+          <%=booking[i].EquipmentName%><br>
+          <%=booking[i].EquipmentType%><br>
+          <%=booking[i].UserName%><br>
+          <%=booking[i].UserEmail%><br>
+          <%=booking[i].UserPhone%><br>
+          <%=booking[i].date%><br>
+          <%=booking[i].createdAt%><br>
+          <% }%>
+
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="10:00-11:00"){ %>
+                <%=booking[i].id%><br>
+                <%=booking[i].date%><br>
+                <%=booking[i].user%>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="11:00-12:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+          <%=booking[i].EquipmentType%><br>
+          <%=booking[i].UserName%><br>
+          <%=booking[i].UserEmail%><br>
+          <%=booking[i].UserPhone%><br>
+          <%=booking[i].date%><br>
+          <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="12:00-01:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+              <%=booking[i].EquipmentType%><br>
+              <%=booking[i].UserName%><br>
+              <%=booking[i].UserEmail%><br>
+              <%=booking[i].UserPhone%><br>
+              <%=booking[i].date%><br>
+              <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="01:00-02:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+              <%=booking[i].EquipmentType%><br>
+              <%=booking[i].UserName%><br>
+              <%=booking[i].UserEmail%><br>
+              <%=booking[i].UserPhone%><br>
+              <%=booking[i].date%><br>
+              <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="02:00-03:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+              <%=booking[i].EquipmentType%><br>
+              <%=booking[i].UserName%><br>
+              <%=booking[i].UserEmail%><br>
+              <%=booking[i].UserPhone%><br>
+              <%=booking[i].date%><br>
+              <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="03:00-04:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+              <%=booking[i].EquipmentType%><br>
+              <%=booking[i].UserName%><br>
+              <%=booking[i].UserEmail%><br>
+              <%=booking[i].UserPhone%><br>
+              <%=booking[i].date%><br>
+              <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+        <td scope="row">
+            <%if( booking[i].time=="04:00-05:00"){ %>
+              <%=booking[i].EquipmentName%><br>
+              <%=booking[i].EquipmentType%><br>
+              <%=booking[i].UserName%><br>
+              <%=booking[i].UserEmail%><br>
+              <%=booking[i].UserPhone%><br>
+              <%=booking[i].date%><br>
+              <%=booking[i].createdAt%><br>
+                <% }%>
+        </td>
+      </tr>
+
+      <%}%>
+   
+      </tbody>
+    </table>
+    </div>

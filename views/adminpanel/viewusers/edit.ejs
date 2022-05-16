@@ -1,0 +1,71 @@
+<%- include("../partials/header") %>
+
+<main class="container">
+
+  <div class="row">
+
+    <div class="col-md-6 mx-auto">
+      <h1 class="display-6">Edit User</h1>
+      <form action="/viewusers/<%= user._id %>?_method=PATCH" method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" name="email" id="email" placeholder="User Name" value="<%=user.email%> ">
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" id="username" placeholder="username" value="<%=user.username%> ">
+        </div>
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" value="<%=user.phoneNumber%> ">
+        </div>
+        <div class="mb-3">
+          <label for="organization" class="form-label">Organization</label>
+          <input type="text" class="form-control" name="organization" id="organization" placeholder="organization" value="<%=user.organization%> ">
+        </div>
+        <div class="mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <input type="text" class="form-control" name="gender" id="gender" placeholder="gender" value="<%=user.gender%> ">
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Role</label>
+          <input type="text" class="form-control" name="role" id="role" placeholder="Role" value="<%=user.role%> ">
+        </div>
+
+    
+
+        <label for="inductionTraning"> inductionTraning</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="true">
+          <label class="form-check-label" for="inductionTraning">
+            Yes
+          </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="false">
+          <label class="form-check-label" for="inductionTraning">
+            No
+          </label>
+        </div>
+
+
+        <label for="isVerified"> isVerified</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="true">
+          <label class="form-check-label" for="isVerified">
+            Yes
+          </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="false">
+          <label class="form-check-label" for="isVerified">
+            No
+          </label>
+        </div>
+
+
+        <button type="submit" class="btn btn-success btn-small">Submit</button>
+      </form>
+    </div>
+  </div>
+</main>

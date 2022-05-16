@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs')  %>
+
+<body>
+    <div class="container-fluid">
+        <% users.forEach((user)=> { %>
+        <%if(user.isVerified==false){%>
+        <a href="/viewusers/approval"> <button type="button" class="btn btn-warning">Users Waiting for Approval</button></a><br><br>
+        <%}})%>
+    <table class="table .table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Organization</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Type</th>
+            <th scope="col">Induction Training</th>
+            <th scope="col">Verified By Admin</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+            <% users.forEach((user)=> { %>
+                <tr>
+                    <td><%=user.email %></td>
+                    <td><%=user.username %></td>
+                    <td><%=user.phoneNumber %></td>
+                    <td><%=user.organization %></span></td>
+                    <td><%=user.gender%></td>
+                    <td><%=user.role%></td>
+                    <td><%if(user.inductionTraning==true){%>
+                        Completed
+                        <%}else{%>
+                        Pending
+                        <%}%>
+                        </td>
+                    <td>
+                        <%if(user.isVerified==true){%>
+                            Verified
+                            <%}else{%>
+                            Waiting for Approval
+                            <%}%>
+                    </td>
+                    <td><a href="/viewusers/<%=user._id%>/edit"><button class="btn btn-success btn-small">Edit</button></a></td>
+                    <td><form class="d-inline-block" action="/viewusers/<%=user._id%>?_method=DELETE" method="POST"><button class="btn btn-danger btn-small">Delete</button></form></td>
+                </tr>
+            </tr >
+            <% }) %>
+        </tbody>
+      </table>
+      </div>
+</body>
+

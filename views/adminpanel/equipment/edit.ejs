@@ -1,0 +1,85 @@
+<%- include('../partials/header.ejs')  %>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <h1 class="display-6">Edit Equipment</h1>
+    <form action="/admin/equipment/<%=equipment._id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="equipmentName" id="equipmentName"
+          placeholder="Equipment Name" value="<%=equipment.equipmentName%>">
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
+        <input class="form-control" type="file" id="image" name="image"><br>
+        <input type="text" class="form-control" name="image" id="image" value="<%=equipment.image%>" placeholder="No image url">
+      </div>
+
+      <div class="mb-3">
+        <label for="desc" class="form-label">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="5"><%=equipment.description%></textarea>
+      </div>
+
+      <select class="form-select" aria-label="Default select example" id="type" name="type">
+        <%if(equipment.type=="Carpentry"){%>
+          <option value="Carpentry" selected>Carpentry</option>
+          <%}else{%>
+            <option value="Carpentry">Carpentry</option>
+          <%}%>
+        
+        <%if(equipment.type=="Electronic"){%>
+          <option value="Electronic" selected>Electronic</option>
+          <%}else{%>
+            <option value="Electronic">Electronic</option>
+          <%}%>
+          <%if(equipment.type=="Heavy"){%>
+            <option value="Heavy" selected>Heavy</option>
+            <%}else{%>
+              <option value="Heavy">Heavy</option>
+            <%}%>
+            <%if(equipment.type=="Metal"){%>
+              <option value="Metal" selected>Metal</option>
+              <%}else{%>
+                <option value="Metal">Metal Works</option>
+              <%}%>
+      </select>
+      <br><br>
+
+      <label for="booking" class="form-label">Can Be Booked By</label>-<br>
+      
+      <input type="checkbox" id="student" name="student" value="true">
+      <label for="student"> Student</label><br>
+      <input type="checkbox" id="startup" name="startup" value="true">
+      <label for="startup"> Startup</label><br>
+      <input type="checkbox" id="communtiy" name="communtiy" value="true">
+      <label for="communtiy"> Communtiy</label><br>
+      <input type="checkbox" id="company" name="company" value="true">
+      <label for="company"> Company</label></br>
+
+
+      <label for="isAvailable"> isAvailable</label>
+  
+          <div class="form-check">
+            <%if (equipment.isAvailable==true){%>
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable" value="true" checked="checked">
+            <%}else{%>
+              <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable" value="true">
+              <%}%>
+            <label class="form-check-label" for="isAvailable">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <%if (equipment.isAvailable==false){%>
+          <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable" value="false" checked="checked">
+          <%}else{%>
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable" value="false">
+            <%}%>
+            <label class="form-check-label" for="isAvailable">
+              No
+            </label>
+          </div>
+      <button type="submit" class="btn btn-success btn-small">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<%- include('../partials/header.ejs') %>
+<div class="container">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <h1>Equipment</h1>
+  <a href="/admin/equipment/new" class="btn btn-info btn-small">Add new</a>
+  <p>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a id="a" class="nav-link active" href="/admin/equipment">All</a>
+      </li>
+      <li class="nav-item">
+        <a id="c" class="nav-link" href="/admin/equipment/carpentry">Carpentry</a>
+      </li>
+      <li class="nav-item">
+        <a id="e" class="nav-link" href="/admin/equipment/electronic">Electronic</a>
+      </li>
+      <li class="nav-item">
+        <a id="h" class="nav-link" href="/admin/equipment/heavy">Heavy</a>
+
+      <li class="nav-item">
+        <a id="m" class="nav-link" href="/admin/equipment/metal">Metal</a>
+
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+
+    <% for(let i of equipment){ %>
+    <div class="col-lg-4 col-md-6 mb-3">
+      <div class="card mx-auto" style="width: 20rem;">
+        <img src="<%=i.image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Ep Name: <%=i.equipmentName%>
+          </h5>
+          <h6>Type: <%=i.type%>
+            <h6>
+              <span class="card-text">Description: <%=i.description%><br>
+                Booking available for<b> <br>
+                  <%if(i.student==true){%>Student<br>
+                  <%}%>
+                              <%if(i.company==true){%>Company<br>
+                  <%}%>
+                                  <%if(i.community==true){%>Community<br>
+                  <%}%>
+                                      <%if(i.startup==true){%>Startup<br>
+                  <%}%>
+                        </b>
+                        Available <%=i.isAvailable%>
+              </span>
+              <br>
+              <a href="/admin/equipment/<%= i._id %>/edit" class="btn btn-info btn-small">Edit</a>
+
+              <form class="d-inline-block" action="/admin/equipment/<%= i.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger btn-small">Delete</button>
+              </form>
+
+        </div>
+      </div>
+    </div>
+    <%}%>
+          <%if(all){%>
+    <script>
+      $(".nav-link").removeClass("active");
+      $("#a").addClass("active");
+    </script>
+    <%}else if(equipment[0].type=="Electronic" ){%>
+    <script>
+      $(".nav-link").removeClass("active");
+      $("#e").addClass("active");
+    </script>
+    <%}else if(equipment[0].type=="Heavy" ){%>
+    <script>
+      $(".nav-link").removeClass("active");
+      $("#h").addClass("active");
+    </script>
+    <%}else if(equipment[0].type=="Metal" ){%>
+    <script>
+      $(".nav-link").removeClass("active");
+      $("#m").addClass("active");
+    </script>
+    <%}else if(equipment[0].type=="Carpentry" ){%>
+    <script>
+      $(".nav-link").removeClass("active");
+      $("#c").addClass("active");
+    </script>
+    <%}%>
+
+
+    </div>
+  </div>

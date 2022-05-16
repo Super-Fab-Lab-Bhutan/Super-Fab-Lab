@@ -1,0 +1,45 @@
+<%- include('../partials/header.ejs')  %>
+<main class="container">
+
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1 class="display-6">New File</h1>
+      <form action="/addFile" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Title">
+        </div>
+        <select class="form-select" aria-label="Default select example" id="type" name="type">
+          <option selected>Select the type of Equipment</option>
+          <option value="Resource">Training Resource</option>
+          <option value="Manual">Machine Manuals</option>
+          <option value="Video">Youtube Link</option>
+        </select>
+        <br>
+        <br>
+        <script>
+          $('select').on('change', function() {
+            if (this.value == "Video") {
+              var szData = '<label for="FileUrl" class="form-label">videoURL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
+              $('.ss').html(szData)
+            } else {
+              var s = '<label for="image" class="form-label">Uplaod</label><br> <input type="file" id="file" name="file"><br> (only pdf accepted if its something besides that the file will not be uploaded but only the content will get uploaded)'
+              $('.ss').html(s)
+            }
+          });
+        </script>
+        <div class="mb-3 ss">
+
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" name="description" id="description" rows="5" placeholder="Description"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-success btn-small">Submit</button>
+      </form>
+    </div>
+  </div>
+</main>

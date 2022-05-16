@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container">
+
+  <h1>File Uploads</h1>
+  <a href="/admin/fileupload/new" class="btn btn-info btn-small">Add new</a>
+  <p>
+  <div class="row">
+    <% for(let i of file){ %>
+    <div class="col-lg-4 col-md-6 mb-3">
+      <div class="card mx-auto" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=i.name%>
+          </h5>
+
+
+          <span class="card-text">
+            Description: <%=i.description%><br>
+          </span>
+          <span class="card-text">
+            Type: <%=i.type%><br>
+          </span>
+          <span class="card-text">
+            File :<a target="_blank" href="<%=i.FileUrl%>">Show</a><br> 
+          </span>
+          
+          <form class="d-inline-block" action="/admin/fileupload/<%= i.id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-small">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%}%>
+        </div>
+    </div>
