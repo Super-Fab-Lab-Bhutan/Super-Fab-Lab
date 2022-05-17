@@ -2,6 +2,36 @@ const fs = require("fs");
 
 const fileUpload = require("../model/fileUpload");
 
+
+exports.getMachine = async (req, res) => {
+  try {
+    const file = await fileUpload.find({type: "Manual",});
+    res.json({ file });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.getTraining = async (req, res) => {
+  try {
+    const file = await fileUpload.find({type: "Resource"});
+    res.json({ file });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.getVideo = async (req, res) => {
+  try {
+    const file = await fileUpload.find({type: "Video",});
+    res.json({ file });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+
 exports.getFileUploads = async (req, res) => {
   try {
     const file = await fileUpload.find({});

@@ -4,11 +4,20 @@ const router = express.Router();
 const { adminAuth } = require("../middleware/auth");
 const { fileUpload } = require("../middleware/file-upload");
 const {
+  getMachine,
+  getVideo,
+  getTraining,
   getFileUploads,
   addFile,
   deleteFile,
   newFile,
 } = require("../controller/fileUploads");
+
+router.get("/machinemanuals", getMachine);
+
+router.get("/trainingresources", getTraining);
+
+router.get("/video", getVideo);
 
 router.get("/admin/fileUpload", adminAuth, getFileUploads);
 
