@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const {imageUpload} = require("../middleware/file-upload")
+const { adminAuth } = require("../middleware/auth");
+const { imageUpload } = require("../middleware/file-upload");
 
 const {
   getEducation,
@@ -33,22 +34,32 @@ router.get("/titles", getTitles);
 
 /** Admin Side API **/
 
-router.get("/admin/program", getAdminProgram);
+router.get("/admin/program", adminAuth, getAdminProgram);
 
-router.get("/admin/education", getAdminEducation);
+router.get("/admin/education", adminAuth, getAdminEducation);
 
-router.get("/admin/research", getAdminResearch);
+router.get("/admin/research", adminAuth, getAdminResearch);
 
-router.get("/admin/training", getAdminTraining);
+router.get("/admin/training", adminAuth, getAdminTraining);
 
-router.post("/admin/addProgram", imageUpload.single('image'), postProgram);
+router.post(
+  "/admin/addProgram",
+  adminAuth,
+  imageUpload.single("image"),
+  postProgram
+);
 
-router.get("/admin/program/new", newProgram);
+router.get("/admin/program/new", adminAuth, newProgram);
 
-router.get("/admin/program/:id/edit", editProgram);
+router.get("/admin/program/:id/edit", adminAuth, editProgram);
 
-router.patch("/admin/addProgram/:id",imageUpload.single('image'), patchProgram);
+router.patch(
+  "/admin/addProgram/:id",
+  adminAuth,
+  imageUpload.single("image"),
+  patchProgram
+);
 
-router.delete("/admin/program/:id", deleteProgram);
+router.delete("/admin/program/:id", adminAuth, deleteProgram);
 
 module.exports = router;

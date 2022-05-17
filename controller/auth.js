@@ -75,6 +75,7 @@ exports.login = async (req, res, next) => {
             httpOnly: false,
             maxAge: maxAge * 1000,
           });
+      
           res.json({
             status: 200,
             message: "User successfully Logged in",
@@ -116,4 +117,8 @@ exports.getAdmin = async (req, res) => {
 
 exports.adminLogin = async (req, res) => {
   res.render("./login");
+};
+
+exports.get404 = async (req, res) => {
+  res.render("./404");
 };

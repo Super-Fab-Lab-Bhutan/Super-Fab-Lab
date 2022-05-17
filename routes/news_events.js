@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const {imageUpload} = require("../middleware/file-upload")
+const { adminAuth } = require("../middleware/auth");
+const { imageUpload } = require("../middleware/file-upload");
 
 const {
   getNews_Events,
@@ -10,7 +11,7 @@ const {
   editNews,
   newNews,
   updateNews,
-  deleteNews
+  deleteNews,
 } = require("../controller/news_events");
 
 /** Client Side API **/
@@ -19,16 +20,21 @@ router.get("/news-and-events", getNews_Events);
 
 /** Admin Side API **/
 
-router.get("/admin/news-and-events", getAdminNews_Events);
+router.get("/admin/news-and-events", adminAuth, getAdminNews_Events);
 
-router.get("/admin/news-and-events/new", newNews);
+router.get("/admin/news-and-events/new", adminAuth, newNews);
 
-router.get("/admin/news-and-events/:id/edit", editNews);
+router.get("/admin/news-and-events/:id/edit", adminAuth, editNews);
 
-router.post("/addnews", imageUpload.single('image'),addNews);
+router.post("/addnews", imageUpload.single("image"), adminAuth, addNews);
 
-router.patch("/admin/news-and-events/:id",imageUpload.single('image'), updateNews);
+router.patch(
+  "/admin/news-and-events/:id",
+  imageUpload.single("image"),
+  adminAuth,
+  updateNews
+);
 
-router.delete("/admin/news-and-events/:id", deleteNews);
+router.delete("/admin/news-and-events/:id", adminAuth, deleteNews);
 
 module.exports = router;

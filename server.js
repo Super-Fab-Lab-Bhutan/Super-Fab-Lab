@@ -37,6 +37,7 @@ app.use(require("./routes/equipments"));
 app.use(require("./routes/news_events"));
 app.use(require("./routes/programs"));
 app.use(require("./routes/users"));
+app.use(require("./routes/aboutus"));
 app.use(require("./routes/fileUploads"));
 app.use(require("./routes/booking"));
 

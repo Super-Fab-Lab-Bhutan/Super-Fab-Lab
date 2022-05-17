@@ -1,11 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const { register, login, getGateway, logout, adminLogin,getAdmin} = require("../controller/auth");
+const { adminAuth } = require("../middleware/auth");
+const {
+  register,
+  login,
+  getGateway,
+  logout,
+  adminLogin,
+  getAdmin,
+  get404,
+} = require("../controller/auth");
 
 router.get("/", getGateway);
 
-router.get("/admin", getAdmin)
+router.get("/admin",adminAuth, getAdmin);
 
 router.get("/login", adminLogin);
 
@@ -15,4 +24,5 @@ router.route("/api/auth/register").post(register);
 
 router.route("/api/auth/login").post(login);
 
+router.get("/404", get404);
 module.exports = router;

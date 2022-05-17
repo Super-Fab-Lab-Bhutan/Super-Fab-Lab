@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs') %>
+<div class="container">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <h1>Add a new Team </h1>
+  <a href="/admin/team/new" class="btn btn-info btn-small">Add new</a>
+  <p>
+
+  <div class="row">
+
+    <% for(let i of Teams){ %>
+    <div class="col-lg-4 col-md-6 mb-3">
+      <div class="card mx-auto" style="width: 20rem;">
+        <img src="<%=i.image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name: <%=i.name%>
+          </h5>
+            <h6>
+              <span class="card-text">Description: <%=i.description%><br>
+               
+              </span>
+              <br>
+              <a href="/admin/team/<%= i._id %>/edit" class="btn btn-info btn-small">Edit</a>
+
+              <form class="d-inline-block" action="/admin/team/<%= i.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger btn-small">Delete</button>
+              </form>
+
+        </div>
+      </div>
+    </div>
+    <%}%>
+          
+
+    </div>
+  </div>

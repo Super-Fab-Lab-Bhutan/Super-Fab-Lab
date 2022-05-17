@@ -17,13 +17,12 @@ exports.adminAuth = (req, res, next) => {
       }
     });
   } else {
-    return res
-      .status(401)
-      .json({ message: "Not authorized, token not available" });
+    res.redirect("/");
   }
 };
 
 exports.Auth = (req, res, next) => {
+
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, jwtSecret, (err, decodedToken) => {
@@ -38,7 +37,7 @@ exports.Auth = (req, res, next) => {
           next();
         } else if (decodedToken.role === "company") {
           next();
-        } else {
+        } else if (decodedToken.role === "admin"){
           next();
         }
       }

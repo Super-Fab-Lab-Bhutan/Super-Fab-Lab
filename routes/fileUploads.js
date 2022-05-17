@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {fileUpload} = require("../middleware/file-upload")
+
+const { adminAuth } = require("../middleware/auth");
+const { fileUpload } = require("../middleware/file-upload");
 const {
   getFileUploads,
   addFile,
@@ -8,12 +10,12 @@ const {
   newFile,
 } = require("../controller/fileUploads");
 
-router.get("/admin/fileUpload", getFileUploads);
+router.get("/admin/fileUpload", adminAuth, getFileUploads);
 
-router.get("/admin/fileupload/new", newFile);
+router.get("/admin/fileupload/new", adminAuth, newFile);
 
-router.post("/addFile",fileUpload.single('file'), addFile);
+router.post("/addFile", adminAuth, fileUpload.single("file"), addFile);
 
-router.delete("/admin/fileupload/:id", deleteFile);
+router.delete("/admin/fileupload/:id", adminAuth, deleteFile);
 
 module.exports = router;

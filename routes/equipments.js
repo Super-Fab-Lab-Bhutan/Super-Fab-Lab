@@ -36,28 +36,34 @@ router.get("/machines/metal-works", getMetal);
 
 /** Admin Side API **/
 
-router.get("/admin/equipment", getEquipment);
+router.get("/admin/equipment", adminAuth, getEquipment);
 
-router.get("/admin/equipment/carpentry", getAdminCarpentry);
+router.get("/admin/equipment/carpentry", adminAuth, getAdminCarpentry);
 
-router.get("/admin/equipment/electronic", getAdminElectronic);
+router.get("/admin/equipment/electronic", adminAuth, getAdminElectronic);
 
-router.get("/admin/equipment/metal", getAdminMetal);
+router.get("/admin/equipment/metal", adminAuth, getAdminMetal);
 
-router.get("/admin/equipment/heavy", getAdminHeavy);
+router.get("/admin/equipment/heavy", adminAuth, getAdminHeavy);
 
-router.get("/admin/equipment/new", newEquipment);
+router.get("/admin/equipment/new", adminAuth, newEquipment);
 
-router.get("/admin/equipment/:id/edit", editEquipment);
+router.get("/admin/equipment/:id/edit", adminAuth, editEquipment);
 
-router.post("/admin/addEquipments", imageUpload.single("image"), postEquipment);
+router.post(
+  "/admin/addEquipments",
+  adminAuth,
+  imageUpload.single("image"),
+  postEquipment
+);
 
 router.patch(
   "/admin/equipment/:id",
+  adminAuth,
   imageUpload.single("image"),
   patchEquipment
 );
 
-router.delete("/admin/equipment/:id", equipmentDelete);
+router.delete("/admin/equipment/:id", adminAuth, equipmentDelete);
 
 module.exports = router;
