@@ -23,11 +23,11 @@ router.get("/trainingresources", getTraining);
 router.get("/video", getVideo);
 
 
-router.get("/admin/machinemanuals", getAdminMachine);
+router.get("/admin/machinemanuals",adminAuth, getAdminMachine);
 
-router.get("/admin/trainingresources", getAdminTraining);
+router.get("/admin/trainingresources",adminAuth, getAdminTraining);
 
-router.get("/admin/video", getAdminVideo);
+router.get("/admin/video",adminAuth, getAdminVideo);
 
 router.get("/admin/fileUpload", adminAuth, getFileUploads);
 

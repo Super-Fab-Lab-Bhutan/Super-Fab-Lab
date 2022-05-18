@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static("./public"));
 app.use("/uploads/images", express.static(path.join("uploads", "images"))); //Multer directory for images
 app.use("/uploads/files", express.static(path.join("uploads", "files"))); //Multer directory for files
+app.use("/uploads/gallery", express.static(path.join("uploads", "gallery")));
 
 app.use(require("./routes/auth"));
 app.use(require("./routes/equipments"));

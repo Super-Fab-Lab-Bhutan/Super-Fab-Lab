@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { adminAuth } = require("../middleware/auth");
-const { imageUpload } = require("../middleware/file-upload");
+const { galleryUpload } = require("../middleware/file-upload");
 const {
   getTeam,
   getAdminTeam,
@@ -24,7 +24,7 @@ router.get("/admin/gallery", adminAuth, getAdmingallery);
 router.post(
   "/admin/addgallery",
   adminAuth,
-  imageUpload.single("image"),
+  galleryUpload.single("image"),
   postgallery
 );
 
