@@ -2,10 +2,9 @@ const fs = require("fs");
 
 const fileUpload = require("../model/fileUpload");
 
-
 exports.getMachine = async (req, res) => {
   try {
-    const file = await fileUpload.find({type: "Manual",});
+    const file = await fileUpload.find({ type: "Manual" });
     res.json({ file });
   } catch (e) {
     console.log(e);
@@ -14,7 +13,7 @@ exports.getMachine = async (req, res) => {
 
 exports.getTraining = async (req, res) => {
   try {
-    const file = await fileUpload.find({type: "Resource"});
+    const file = await fileUpload.find({ type: "Resource" });
     res.json({ file });
   } catch (e) {
     console.log(e);
@@ -23,19 +22,44 @@ exports.getTraining = async (req, res) => {
 
 exports.getVideo = async (req, res) => {
   try {
-    const file = await fileUpload.find({type: "Video",});
+    const file = await fileUpload.find({ type: "Video" });
     res.json({ file });
   } catch (e) {
     console.log(e);
   }
 };
 
+exports.getAdminMachine = async (req, res) => {
+  try {
+    const file = await fileUpload.find({ type: "Manual" });
+    res.render("./adminpanel/fileUpload/manual",{ file, all: false });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
+exports.getAdminTraining = async (req, res) => {
+  try {
+    const file = await fileUpload.find({ type: "Resource" });
+    res.render("./adminpanel/fileUpload/resource",{ file, all: false });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+exports.getAdminVideo = async (req, res) => {
+  try {
+    const file = await fileUpload.find({ type: "Video" });
+    res.render("./adminpanel/fileUpload/video", { file, all: false });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 exports.getFileUploads = async (req, res) => {
   try {
     const file = await fileUpload.find({});
-    res.render("./adminpanel/fileUpload/show", { file });
+    res.render("./adminpanel/fileUpload/show", { file, all: true });
   } catch (e) {
     console.log(e);
   }

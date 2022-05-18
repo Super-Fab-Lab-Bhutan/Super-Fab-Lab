@@ -7,6 +7,9 @@ const {
   getMachine,
   getVideo,
   getTraining,
+  getAdminMachine,
+  getAdminVideo,
+  getAdminTraining,
   getFileUploads,
   addFile,
   deleteFile,
@@ -18,6 +21,13 @@ router.get("/machinemanuals", getMachine);
 router.get("/trainingresources", getTraining);
 
 router.get("/video", getVideo);
+
+
+router.get("/admin/machinemanuals", getAdminMachine);
+
+router.get("/admin/trainingresources", getAdminTraining);
+
+router.get("/admin/video", getAdminVideo);
 
 router.get("/admin/fileUpload", adminAuth, getFileUploads);
 

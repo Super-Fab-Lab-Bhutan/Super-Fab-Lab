@@ -9,9 +9,26 @@ const {
   newTeam,
   teamDelete,
   postTeam,
+  getImages,
+  getAdmingallery,
+  postgallery,
+  galleryDelete,
 } = require("../controller/aboutus");
 
-router.get("/team", adminAuth, getTeam);
+router.get("/team", getTeam);
+
+router.get("/getimages", getImages);
+
+router.get("/admin/gallery", adminAuth, getAdmingallery);
+
+router.post(
+  "/admin/addgallery",
+  adminAuth,
+  imageUpload.single("image"),
+  postgallery
+);
+
+router.delete("/admin/gallery/:id", adminAuth, galleryDelete);
 
 router.get("/admin/team", adminAuth, getAdminTeam);
 

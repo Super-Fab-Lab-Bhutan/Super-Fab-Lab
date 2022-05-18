@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %>
+<div class="container">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1 class="display-6">Add Image</h1>
+      <form action="/admin/addgallery" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
+          <input class="form-control" type="file" id="image" name="image">
+        </div>
+
+        <button type="submit" class="btn btn-success btn-small" id="submit" style="visibility: hidden">Submit</button>
+      </form>
+    </div>
+  </div>
+  <p>
+
+  <div class="row">
+
+    <% for(let i of gallery){ %>
+    <div class="col-lg-4 col-md-6 mb-3">
+      <div class="card mx-auto" style="width: 20rem;">
+        <img src="<%=i.image%>" class="card-img-top" alt="...">
+        <form class="d-inline-block" action="/admin/gallery/<%= i.id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger btn-small">Delete</button>
+        </form>
+      </div>
+    </div>
+    <%}%>
+          
+<script>
+  $("input[type=file]").change(function(){
+
+ if ($(this).val()) {
+  $("#submit").removeAttr( 'style' );
+ }else{
+  $("#submit").css("visibility","hidden")
+ }
+ });
+
+</script>
+    </div>
+  </div>
