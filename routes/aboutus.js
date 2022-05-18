@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { adminAuth } = require("../middleware/auth");
-const { galleryUpload } = require("../middleware/file-upload");
+const { galleryUpload ,imageUpload} = require("../middleware/file-upload");
 const {
   getTeam,
   getAdminTeam,
