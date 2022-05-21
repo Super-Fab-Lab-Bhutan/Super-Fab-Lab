@@ -1,1 +1,2 @@
-all images are stored here
+
+all gallery images are stored here

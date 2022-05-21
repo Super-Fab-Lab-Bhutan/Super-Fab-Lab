@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs')  %>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <h1 class="display-6">Edit <%= file.name %></h1>
+    <form action="/admin/file_edit/<%=file._id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" value="<%= file.name %> ">
+      </div>
+      <div class="mb-3">
+        <label for="file" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
+        <input class="form-control" type="file" id="file" name="file"><br>
+        <h6>Image Url</h6> <h5><b><%=file.FileUrl%></b></h5>
+      </div>
+
+      <select class="form-select" aria-label="Default select example" id="type" name="type">
+        <%if(file.type=="Resource"){%>
+        <option value="Resource" selected>Resource</option>
+        <%}else{%>
+        <option value="Resource">Resource</option>
+        <%}%>
+                
+                <%if(file.type=="Manual"){%>
+        <option value="Manual" selected>Manual</option>
+        <%}else{%>
+        <option value="Manual">Manual</option>
+        <%}%>
+                  <%if(file.type=="Video"){%>
+        <option value="Video" selected>Video</option>
+        <%}else{%>
+        <option value="Video">Video</option>
+        <%}%>
+              </select>
+
+            <div class="mb-3">
+                <label for="desc" class="form-label">Description</label>
+                <textarea class="form-control" name="description" id="description"rows="5"><%= file.description %> </textarea>
+  </div>
+  <button type="submit" class="btn btn-success btn-small">Submit</button>
+  </form>
+</div>
+</div>

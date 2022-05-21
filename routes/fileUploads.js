@@ -14,6 +14,8 @@ const {
   addFile,
   deleteFile,
   newFile,
+  updateFile,
+  getEditFile
 } = require("../controller/fileUploads");
 
 router.get("/machinemanuals", getMachine);
@@ -34,6 +36,10 @@ router.get("/admin/fileUpload", adminAuth, getFileUploads);
 router.get("/admin/fileupload/new", adminAuth, newFile);
 
 router.post("/addFile", adminAuth, fileUpload.single("file"), addFile);
+
+router.patch("/admin/file_edit/:id",adminAuth,fileUpload.single("file"),updateFile)
+
+router.get("/admin/file_edit/:id", adminAuth, getEditFile);
 
 router.delete("/admin/fileupload/:id", adminAuth, deleteFile);
 

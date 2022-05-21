@@ -43,7 +43,7 @@
           <span class="card-text">
             File :<a target="_blank" href="<%=i.FileUrl%>">Show</a><br>
           </span>
-
+          <a href="/admin/file_edit/<%=i._id%>" class="btn btn-info btn-small">Edit</a>
           <form class="d-inline-block" action="/admin/fileupload/<%= i.id %>?_method=DELETE" method="POST">
             <button class="btn btn-danger btn-small">Delete</button>
           </form>

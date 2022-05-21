@@ -32,7 +32,7 @@ exports.getVideo = async (req, res) => {
 exports.getAdminMachine = async (req, res) => {
   try {
     const file = await fileUpload.find({ type: "Manual" });
-    res.render("./adminpanel/fileUpload/manual",{ file, all: false });
+    res.render("./adminpanel/fileUpload/manual", { file, all: false });
   } catch (e) {
     console.log(e);
   }
@@ -41,7 +41,7 @@ exports.getAdminMachine = async (req, res) => {
 exports.getAdminTraining = async (req, res) => {
   try {
     const file = await fileUpload.find({ type: "Resource" });
-    res.render("./adminpanel/fileUpload/resource",{ file, all: false });
+    res.render("./adminpanel/fileUpload/resource", { file, all: false });
   } catch (e) {
     console.log(e);
   }
@@ -103,7 +103,40 @@ exports.deleteFile = async (req, res) => {
 
     res.redirect("/admin/fileupload");
   } catch (e) {
-    req.flash("error", "oops,something went wrong");
+    res.redirect("/error");
+  }
+};
+
+exports.updateFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    var { image } = req.body;
+
+    if (req.file) {
+      fs.unlink(image, (err) => {
+        if (err == null) {
+          image = req.file.path;
+        }
+      });
+      image = req.file.path;
+    }
+
+    const updatedFile = { ...req.body, FileUrl: image };
+
+    await fileUpload.findByIdAndUpdate(id, updatedFile);
+
+    res.redirect("/admin/fileupload");
+  } catch (e) {
+    res.redirect(e);
+  }
+};
+
+exports.getEditFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const file = await fileUpload.findById(id);
+    res.render("./adminpanel/fileUpload/edit", { file });
+  } catch (e) {
     res.redirect("/error");
   }
 };
