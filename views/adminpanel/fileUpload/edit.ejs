@@ -9,11 +9,32 @@
         <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" value="<%= file.name %> ">
       </div>
       <div class="mb-3">
-        <label for="file" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
-        <input class="form-control" type="file" id="file" name="file"><br>
-        <h6>Image Url</h6> <h5><b><%=file.FileUrl%></b></h5>
+        <h6>Image Url</h6>
+        <h5><b><%=file.FileUrl%></b></h5>
       </div>
 
+      Change Url To: <select class="form-select" aria-label="Default select example" id="Uploadtype" name="Uploadtype">
+        <option selected>Select Upload Type</option>
+        <option value="File">File</option>
+        <option value="Link">Link</option>
+      </select><br><br>
+
+      <script>
+        $('select').on('change', function() {
+          
+          if (this.value == "Link" ) {
+            var szData = '<label for="file" class="form-label">URL</label> <input type="text" class="form-control" name="fileURL" id="fileURL" placeholder="Url" value="<%=file.FileUrl%>">'
+            $('.ss').html(szData)
+          } else {
+            var s = '<label for="image" class="form-label">Uplaod</label><br> <input type="file" id="file" name="file"><br> (only pdf accepted if its something besides that the file will not be uploaded but only the content will get uploaded)'
+            $('.ss').html(s)
+          }
+        });
+      </script>
+      <div class="mb-3 ss">
+
+      </div>
+      Type: 
       <select class="form-select" aria-label="Default select example" id="type" name="type">
         <%if(file.type=="Resource"){%>
         <option value="Resource" selected>Resource</option>

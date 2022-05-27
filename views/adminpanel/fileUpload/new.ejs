@@ -15,12 +15,19 @@
           <option value="Manual">Machine Manuals</option>
           <option value="Video">Youtube Link</option>
         </select>
+        <br><br>
+        <select class="form-select" aria-label="Default select example" id="Uploadtype" name="Uploadtype">
+          <option selected value="File">File</option>
+          <option value="Link">Link</option>
+        </select>
         <br>
         <br>
         <script>
           $('select').on('change', function() {
-            if (this.value == "Video") {
-              var szData = '<label for="FileUrl" class="form-label">videoURL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
+            
+            
+            if (this.value == "Video" || this.value == "Link" ) {
+              var szData = '<label for="FileUrl" class="form-label">URL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
               $('.ss').html(szData)
             } else {
               var s = '<label for="image" class="form-label">Uplaod</label><br> <input type="file" id="file" name="file"><br> (only pdf accepted if its something besides that the file will not be uploaded but only the content will get uploaded)'

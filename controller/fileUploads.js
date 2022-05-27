@@ -110,24 +110,52 @@ exports.deleteFile = async (req, res) => {
 exports.updateFile = async (req, res) => {
   try {
     const { id } = req.params;
-    var { image } = req.body;
+    const fileUploads = await fileUpload.findById(id);
 
-    if (req.file) {
-      fs.unlink(image, (err) => {
-        if (err == null) {
-          image = req.file.path;
+    var { image } = req.body;
+ 
+    var { Uploadtype } = req.body;
+    var FileUrl;
+
+    if (Uploadtype == "File") {
+      if (req.file) {
+        fs.exists(fileUploads.FileUrl, function (isExist) {
+          if (isExist) {
+            fs.unlink(fileUploads.FileUrl, (err) => {
+              if (err) {
+                console.log(err);
+              } else {
+                FileUrl = req.file.path;
+              }
+            });
+          }
+        });
+        FileUrl = req.file.path;
+      }
+    } else if (Uploadtype == "Link") {
+      fs.exists(fileUploads.FileUrl, function (isExist) {
+        if (isExist) {
+          fs.unlink(fileUploads.FileUrl, (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              var { fileURL } = req.body;
+              FileUrl = fileURL;
+            }
+          });
         }
       });
-      image = req.file.path;
+      var { fileURL } = req.body;
+      FileUrl = fileURL;
     }
 
-    const updatedFile = { ...req.body, FileUrl: image };
+    const updatedFile = { ...req.body, FileUrl: FileUrl };
 
     await fileUpload.findByIdAndUpdate(id, updatedFile);
 
     res.redirect("/admin/fileupload");
   } catch (e) {
-    res.redirect(e);
+    res.json(e);
   }
 };
 
