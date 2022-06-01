@@ -1,23 +1,50 @@
 <%- include('../partials/header.ejs')  %>
 
 <div class="row">
-    <div class="col-md-6 mx-auto">
-        <h1 class="display-6">Edit <%= program.title %></h1>
-        <form action="/admin/addProgram/<%=program._id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Title Name" value="<%= program.title %> ">
+  <div class="col-md-6 mx-auto">
+    <h1 class="display-6">Edit <%= program.title %></h1>
+    <form action="/admin/addProgram/<%=program._id%>?_method=PATCH" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Title Name" value="<%= program.title %> ">
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
+        <input class="form-control" type="file" id="image" name="image"><br>
+        <input type="text" class="form-control" name="image" id="image" value="<%=program.image%>" placeholder="No image url">
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Type</label>
+        <div class="input-group mb-3">
+          <select id="type" name="type">
+            <%if(program.type=="Education"){%>
+            <option value="Education" selected>Education</option>
+            <%}else{%>
+            <option value="Education">Education</option>
+            <%}%>
+            <%if(program.type=="Education"){%>
+            <option value="Education" selected>Education</option>
+            <%}else{%>
+            <option value="Education">Education</option>
+            <%}%>
+                <%if(program.type=="Training"){%>
+            <option value="Training" selected>Training</option>
+            <%}else{%>
+            <option value="Training">Training</option>
+            <%}%>
+                    <%if(program.type=="Research"){%>
+            <option value="Research" selected>Research And Development</option>
+            <%}else{%>
+            <option value="Research">Research</option>
+            <%}%>
+                    </select>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Image Upload (the image size should be 400px x 400px)</label>
-                <input class="form-control" type="file" id="image" name="image"><br>
-                <input type="text" class="form-control" name="image" id="image" value="<%=program.image%>" placeholder="No image url">
-              </div>
             <div class="mb-3">
                 <label for="desc" class="form-label">Description</label>
                 <textarea class="form-control" name="description"  id="mytextarea" rows="5" placeholder="Description"><%= program.description %> </textarea>
-            </div>
-            <button type="submit" class="btn btn-success btn-small">Submit</button>
-        </form>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-small">Submit</button>
+    </form>
+  </div>
 </div>
