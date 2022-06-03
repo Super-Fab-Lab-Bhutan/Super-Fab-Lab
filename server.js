@@ -29,9 +29,9 @@ app.use(express.json()); //returns middleware that only parses json but with bui
 app.use(express.urlencoded({ extended: true })); //TO GET FORM DATA
 app.use(express.static(path.join(__dirname, "static")));
 app.use(express.static("./public"));
-app.use("/uploads/images", express.static(path.join("uploads", "images"))); //Multer directory for images to make it public
-app.use("/uploads/files", express.static(path.join("uploads", "files"))); //Multer directory for files to make it public
-app.use("/uploads/gallery", express.static(path.join("uploads", "gallery"))); //Multer directory for images to make it public
+//app.use("/uploads/images", express.static(path.join("uploads", "images"))); //Multer directory for images to make it public
+//app.use("/uploads/files", express.static(path.join("uploads", "files"))); //Multer directory for files to make it public
+app.use("/uploads", express.static(__dirname + '/uploads')); //Multer directory for images and files to make it public
 
 app.use(require("./routes/auth"));
 app.use(require("./routes/equipments"));
