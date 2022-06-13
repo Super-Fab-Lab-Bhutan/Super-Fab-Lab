@@ -46,12 +46,13 @@
                             <%}%>
                     </td>
                     <td><a href="/viewusers/<%=user._id%>/edit"><button class="btn btn-success btn-small">Edit</button></a></td>
-                    <td><form class="d-inline-block" action="/viewusers/<%=user._id%>?_method=DELETE" method="POST"><button class="btn btn-danger btn-small">Delete</button></form></td>
+                    <td><form class="deleteform d-inline-block " action="/viewusers/<%=user._id%>?_method=DELETE" method="POST"><button class="btn btn-danger btn-small" >Delete</button></form></td>
                 </tr>
             </tr >
             <% }) %>
         </tbody>
       </table>
       </div>
+
 </body>
 

@@ -32,37 +32,51 @@
           <input type="text" class="form-control" name="role" id="role" placeholder="Role" value="<%=user.role%> ">
         </div>
 
-    
-
         <label for="inductionTraning"> inductionTraning</label>
+  
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="true">
+          <%if (user.inductionTraning==true){%>
+      <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="true" checked="checked">
+      <%}else{%>
+      <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="true">
+      <%}%>
           <label class="form-check-label" for="inductionTraning">
             Yes
           </label>
         </div>
         <div class="form-check">
-        <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="false">
+          <%if (user.inductionTraning==false){%>
+      <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="false" checked="checked">
+      <%}else{%>
+      <input class="form-check-input" type="radio" name="inductionTraning" id="inductionTraning" value="false">
+      <%}%>
           <label class="form-check-label" for="inductionTraning">
             No
           </label>
         </div>
-
 
         <label for="isVerified"> isVerified</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="true">
-          <label class="form-check-label" for="isVerified">
-            Yes
-          </label>
-        </div>
-        <div class="form-check">
+  
+          <div class="form-check">
+            <%if (user.isVerified==true){%>
+        <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="true" checked="checked">
+        <%}else{%>
+        <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="true">
+        <%}%>
+            <label class="form-check-label" for="isVerified">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <%if (user.isVerified==false){%>
+        <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="false" checked="checked">
+        <%}else{%>
         <input class="form-check-input" type="radio" name="isVerified" id="isVerified" value="false">
-          <label class="form-check-label" for="isVerified">
-            No
-          </label>
-        </div>
-
+        <%}%>
+            <label class="form-check-label" for="isVerified">
+              No
+            </label>
+          </div>
 
         <button type="submit" class="btn btn-success btn-small">Submit</button>
       </form>
