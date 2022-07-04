@@ -1,5 +1,6 @@
 const fs = require("fs");
 
+
 const Equipment = require("../model/equipment");
 
 exports.getEquipment = async (req, res, next) => {
@@ -57,6 +58,7 @@ exports.postEquipment = async (req, res) => {
   var image = null;
   if (req.file) {
     image = req.file.path;
+    
   }
   try {
     const newEquipment = {

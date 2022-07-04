@@ -1,12 +1,28 @@
 const User = require("../model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const emailCheck = require("email-check");
 const jwtSecret = process.env.secret;
 
 exports.register = async (req, res, next) => {
   const { email, password, role, phoneNumber, organization, username, gender } =
     req.body;
+  var valid;
+
+  await emailCheck(email)
+    .then(function (res) {
+      valid = res;
+    })
+    .catch(function (err) {
+      valid = false;
+    });
+
+  if (!valid) {
+    return res.json({
+      status: 400,
+      message: "Email Does not Exist",
+    });
+  }
   if (password.length < 6) {
     return res.json({
       status: 400,
@@ -53,7 +69,7 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
-
+ 
   try {
     const user = await User.findOne({ email });
 
@@ -75,7 +91,7 @@ exports.login = async (req, res, next) => {
             httpOnly: false,
             maxAge: maxAge * 1000,
           });
-      
+
           res.json({
             status: 200,
             message: "User successfully Logged in",

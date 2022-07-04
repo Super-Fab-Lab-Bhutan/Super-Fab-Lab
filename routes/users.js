@@ -10,11 +10,17 @@ const {
   patchUsers,
   deleteUser,
   getApproval,
+  forgotPassword,
+  resetPassword
 } = require("../controller/users");
 
 /** Client Side API **/
 
 router.post("/profile", getProfile);
+
+router.post("/forgotPassword", forgotPassword);
+
+router.post("/resetPassword", resetPassword);
 
 /** Admin Side API **/
 
@@ -29,5 +35,7 @@ router.patch("/viewusers/:id", adminAuth, patchUsers);
 router.patch("/viewusers/:id/approve", adminAuth, patchApprove);
 
 router.delete("/viewusers/:id", adminAuth, deleteUser);
+
+
 
 module.exports = router;
