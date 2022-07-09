@@ -12,20 +12,19 @@ exports.getBookedEq = async (req, res) => {
 };
 
 exports.deleteBooking = async (req, res) => {
-  const userID = req.userId;
   try {
-    const { id } = req.params;
+    const { id, userID } = req.body;
     const booking = await Booking.findOne({ userID: userID });
     const message = "The Booking has been canceled";
     const UserEmail = booking.UserEmail;
-    await Booking.findByIdAndDelete(id);
+    await Booking.findByIdAndDelete({ _id: id });
     /*mail
           .sendMail(UserEmail, message)
           .then((result) => console.log("Email sent...", result))
           .catch((error) => console.log(error.message));*/
-    res.redirect("/profile");
+    res.json(true);
   } catch (e) {
-    res.redirect("/error");
+    res.json(false);
   }
 };
 
@@ -164,8 +163,7 @@ exports.equipmentBooking = async (req, res) => {
 };
 
 exports.getPrevBookings = async (req, res) => {
-  const { date, role } = req.body;
-
+  const { date, role, userId } = req.body;
   try {
     var equipment = null;
 
@@ -189,6 +187,8 @@ exports.getPrevBookings = async (req, res) => {
       equipment = await Equipment.find({});
     }
 
+    let UserBooking = await Booking.find({ user: userId, date: date });
+
     let Data = [];
     let listTime = [
       "09:30-10:30",
@@ -209,7 +209,7 @@ exports.getPrevBookings = async (req, res) => {
       for (let x of listTime) {
         Time.push({
           time: x,
-          booked: false,
+          booked: 2, // not booked
         });
       }
       // populate the list
@@ -217,10 +217,29 @@ exports.getPrevBookings = async (req, res) => {
       let k = 0;
       for (let i of listTime) {
         for (let j of booking) {
-          if (i == j.time && j.EquipmentId == e) {
+          //check for general booking
+          if (i == j.time && e == j.EquipmentId) {
+            //check for user booking
+            for (let l of UserBooking) {
+              if ((i = l.time && date == l.date && e == l.EquipmentId)) {
+                Time[k] = {
+                  time: i,
+                  booked: 1, //booked by user
+                };
+                break;
+              } else {
+                Time[k] = {
+                  time: i,
+                  booked: 0, //booked
+                };
+              }
+            }
+
+            break;
+          } else {
             Time[k] = {
               time: i,
-              booked: true,
+              booked: 2, //not booked
             };
           }
         }
@@ -231,6 +250,7 @@ exports.getPrevBookings = async (req, res) => {
         EquipmentName: i.equipmentName,
         EquipmentId: i._id,
         Booking: Time,
+        Type: i.type,
       };
       Data.push(data);
     }

@@ -14,13 +14,12 @@ const {
 router.get("/admin/booking", adminAuth, getBookedEq);
 
 /**Client Booking**/
-router.post("/user/bookingInduction",  bookInduction);
+router.post("/user/bookingInduction", bookInduction);
 
-router.post("/user/addBooking",  equipmentBooking);
+router.post("/user/addBooking", equipmentBooking);
 
-router.post("/user/Bookings",  getPrevBookings);
+router.post("/user/Bookings", getPrevBookings);
 
-/*this dosent work fix it */
-router.delete("/delete/booking/:id", deleteBooking);
+router.post("/delete/booking", deleteBooking);
 
 module.exports = router;

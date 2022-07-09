@@ -12,9 +12,10 @@ const mailjet = Mailjet.apiConnect(API_KEY, Secret_Key);
 
 exports.getProfile = async (req, res) => {
   const id = req.body.userID;
+  const UserData = await User.findById({ _id: id });
   const bookings = await Booking.find({ user: id });
   try {
-    res.json({ bookings });
+    res.json({ UserData, bookings });
   } catch (e) {
     console.log(e);
   }
