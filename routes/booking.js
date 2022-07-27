@@ -8,10 +8,13 @@ const {
   equipmentBooking,
   getPrevBookings,
   deleteBooking,
+  postBookedEq
 } = require("../controller/booking");
 
 /**Get for Booked Equipment**/
 router.get("/admin/booking", adminAuth, getBookedEq);
+
+router.post("/admin/booking", adminAuth, postBookedEq);
 
 /**Client Booking**/
 router.post("/user/bookingInduction", bookInduction);

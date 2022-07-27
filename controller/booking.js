@@ -4,11 +4,13 @@ const Equipment = require("../model/equipment");
 const User = require("../model/user");
 
 exports.getBookedEq = async (req, res) => {
-  const login = req.role;
+  res.render("./adminpanel/booking/viewbooking");
+};
 
-  const booking = await Booking.find({});
-
-  res.render("./adminpanel/booking/viewbooking", { booking, login });
+exports.postBookedEq = async (req, res) => {
+  const {date} = req.body;
+  const booking = await Booking.find({date});
+  res.json(booking);
 };
 
 exports.deleteBooking = async (req, res) => {
