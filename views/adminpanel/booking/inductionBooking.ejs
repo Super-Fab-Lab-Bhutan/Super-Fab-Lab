@@ -1,0 +1,130 @@
+<%- include('../partials/header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="container">
+            <h1><b>Induction Bookings</b></h1>
+            <h3>Select the date to check bookings for</h3>
+            <form>
+                <input type="date" id="datepicker">
+                &nbsp
+                <input type="submit" value="Check" style="font-size: 1rem">
+            </form>
+            </br>
+
+            <span class="show-search">
+                Search <input id="search-input" type="text">
+                </p>
+            </span>
+        </div>
+        <table class="table table-sm table-bordered">
+            <span class="show-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" data-column="Details" data-order="desc">User Details &#9650</th>
+                        <th scope="col" data-column="Time" data-order="desc">Time &#9650</th>
+                    </tr>
+                </thead>
+            </span>
+            <tbody id="myTable">
+                <tr>
+                    <td colspan="4" style='text-align:center; vertical-align:middle'>
+                        <h1><b>Select Date</b></h1>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    </p>
+    <script>
+        var dataArray = [];
+
+        $('#search-input').on('keyup', function () {
+            var value = $(this).val()
+            var data = searchTable(value, dataArray)
+            buildTable(data)
+        })
+
+        $('th').on('click', function () {
+            var column = $(this).data('column')
+            var order = $(this).data('order')
+            var text = $(this).html()
+            text = text.substring(0, text.length - 1)
+
+            if (order == 'desc') {
+                $(this).data('order', "asc")
+                dataArray = dataArray.sort((a, b) => a[column] > b[column] ? 1 : -1)
+                text += '&#9660'
+
+            } else {
+                $(this).data('order', "desc")
+                dataArray = dataArray.sort((a, b) => a[column] < b[column] ? 1 : -1)
+                text += '&#9650'
+
+            }
+            $(this).html(text)
+            buildTable(dataArray)
+        })
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            date = document.querySelector('#datepicker').value;
+            var day = new Date(date).getUTCDay();
+            if (![6, 0, 1, 2, 3].includes(day)) {
+                try {
+                    const res = await fetch('/BookingInduction', {
+                        method: 'POST',
+                        body: JSON.stringify({ date }),
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    dataArray = await res.json();
+                    buildTable(dataArray)
+                } catch (err) {
+                    console.log(err.message)
+                }
+            } else {
+                alert('Input type date is empty or Invalid Date\nOnly Thursday and Friday Available');
+            }
+        })
+
+
+        function buildTable(data) {
+            var table = document.getElementById('myTable')
+            table.innerHTML = ''
+            if (!data.length) {
+                var row = `<tr >
+							    <td colspan="4" style='text-align:center; vertical-align:middle'>No Matches Found</td>
+                  </tr>`
+                table.innerHTML += row
+            }
+            for (var i = 0; i < data.length; i++) {
+                var row =
+                    `<tr>
+							<td>
+                  Name: ${data[i].UserName}</br>
+                  Email: ${data[i].UserEmail}</br>
+                  Org: ${data[i].UserOrganization}</br>
+                  Phone: ${data[i].UserPhone}</br>
+                  Booked on: ${data[i].createdAt}
+              </td>
+              <td>${data[i].time}</td>
+					  </tr>`
+                table.innerHTML += row
+            }
+        }
+
+        function searchTable(value, data) {
+            var filterdata = []
+            for (var i = 0; i < data.length; i++) {
+                value = value.toLowerCase()
+                var name = data[i].UserName.toLowerCase() + data[i].UserOrganization.toLowerCase() + data[i].time.toLowerCase()
+                if (name.includes(value)) {
+                    filterdata.push(data[i])
+                }
+            }
+            return filterdata
+        }
+    </script>
+
+    </div>

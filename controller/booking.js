@@ -8,8 +8,8 @@ exports.getBookedEq = async (req, res) => {
 };
 
 exports.postBookedEq = async (req, res) => {
-  const {date} = req.body;
-  const booking = await Booking.find({date});
+  const { date } = req.body;
+  const booking = await Booking.find({ date });
   res.json(booking);
 };
 
@@ -29,6 +29,18 @@ exports.deleteBooking = async (req, res) => {
     res.json(false);
   }
 };
+
+exports.getBookingInduction = async (req, res) => {
+  const { date } = req.body
+
+  const data = await bookingInduction.find({ date })
+  res.json(data)
+}
+
+exports.viewBookingInduction = async (req, res) => {
+  res.render("./adminpanel/booking/inductionBooking");
+}
+
 
 exports.bookInduction = async (req, res) => {
   const { date, userID } = req.body;
@@ -258,5 +270,5 @@ exports.getPrevBookings = async (req, res) => {
     }
 
     return res.json(Data);
-  } catch (error) {}
+  } catch (error) { }
 };
