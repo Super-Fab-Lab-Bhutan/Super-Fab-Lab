@@ -1,33 +1,21 @@
-const { request } = require("express");
-const Mailjet = require("node-mailjet");
-const API_KEY = "90ed303e06e6498e6e45180e32d94949";
-const Secret_Key = "77de11b01e64a8b7f04001ff0656b757";
-const mailjet = Mailjet.apiConnect(API_KEY, Secret_Key);
+const sgMail = require('@sendgrid/mail')
+API='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'
+sgMail.setApiKey(API)
 
 exports.SendEmail = async (email, message, subject) => {
-  try {
-    console.log(email);
-    const request = await mailjet.post("send", { version: "v3.1" }).request({
-      Messages: [
-        {
-          From: {
-            Email: "2107.subham@gmail.com",
-            Name: "SFL",
-          },
-          To: [
-            {
-              Email: `${email}`,
-              Name: `${email}`,
-            },
-          ],
-          Subject: `${subject}`,
-          HTMLPart: `${message}`,
-          CustomID: "Passsword Reset",
-        },
-      ],
-    });
-    console.log(!!request);
-  } catch (e) {
-    console.log(e);
+
+  const msg = {
+    to: `${email}`, 
+    from: 'bhutansuperfablab@gmail.com', // Change to your verified sender
+    subject: `${subject}`,
+    html: `${message}`,
   }
+  sgMail
+    .send(msg)
+    .then(() => {
+      const d='Email sent'
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 };

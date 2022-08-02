@@ -1,3 +1,5 @@
+const { sheets } = require("../middleware/uploadToSheets");
+const { SendEmail } = require("../middleware/mailer");
 const Booking = require("../model/booking");
 const bookingInduction = require("../model/bookingInduction");
 const Equipment = require("../model/equipment");
@@ -142,13 +144,23 @@ exports.equipmentBooking = async (req, res) => {
                 times: newtimes,
               });
             }
-
-            //const booking = await Booking.findOne({ userID: userID });
-            //const bid = booking._id.valueOf();
-            // mail.sendMail(time,date,userID,EquipmentId,EquipmentName,
-            // EquipmentType,UserName,UserEmail,UserPhone,UserOrganization,bid)
-            // .then((result) => console.log('Email sent...', result))
-            // .catch((error) => console.log(error.message));
+            const data = {
+              time,
+              date,
+              EquipmentId,
+              EquipmentName,
+              userID,
+              EquipmentType,
+              UserName,
+              UserEmail,
+              UserPhone,
+              UserOrganization,
+            }
+            sheets({ data })
+            const bid = booking._id.valueOf()
+            const subject = "Your Booking is Confirmed. Booking ID: " + bid;
+            const message = `Equipment: ${EquipmentName}<br>Equipment ID: ${EquipmentType}<br>TIme: ${time}</br>Date: ${date}`
+            SendEmail(UserEmail, message, subject)
           } catch (e) {
             console.log(e);
           }

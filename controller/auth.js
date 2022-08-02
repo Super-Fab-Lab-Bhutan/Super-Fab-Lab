@@ -2,6 +2,7 @@ const User = require("../model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailCheck = require("email-check");
+const { sheets } = require("../middleware/uploadToSheets");
 const jwtSecret = process.env.secret;
 
 exports.register = async (req, res, next) => {

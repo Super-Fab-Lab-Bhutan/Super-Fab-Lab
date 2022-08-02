@@ -3,12 +3,9 @@ const Booking = require("../model/booking");
 const PasswordReset = require("../model/forgotPassword");
 
 const bcrypt = require("bcryptjs");
-const API_KEY = "90ed303e06e6498e6e45180e32d94949";
-const Secret_Key = "77de11b01e64a8b7f04001ff0656b757";
 
-const Mailjet = require("node-mailjet");
 const { SendEmail } = require("../middleware/mailer");
-const mailjet = Mailjet.apiConnect(API_KEY, Secret_Key);
+
 
 exports.getProfile = async (req, res) => {
   const id = req.body.userID;
@@ -181,46 +178,15 @@ const sendResetEmail = (id, email, redirectUrl, res) => {
           newPasswordReset
             .save()
             .then(() => {
-              const request = mailjet
-                .post("send", { version: "v3.1" })
-                .request({
-                  Messages: [
-                    {
-                      From: {
-                        Email: "2107.subham@gmail.com",
-                        Name: "SFL",
-                      },
-                      To: [
-                        {
-                          Email: email,
-                          Name: email,
-                        },
-                      ],
-                      Subject: "Passsword Reset Link",
-                      HTMLPart: `<p>We heard that you lost the pasword . </p> 
-                      <p>Don't worry, use the link below to reset it.</p>
-                      <p>This link <b>expires in 6 hours</b>.</p>
-                      <p>Enter the user id and reset token after going to this link</p>
-                      <a href="https://jnwbhutansuperfablab.bt/resetpassword">Reset Password</a>
-                      <p>User ID: ${id} </p>
-                      <p>Reset Token:  ${resetString} </p>`,
-                      CustomID: "Passsword Reset",
-                    },
-                  ],
-                });
-              request
-                .then(() => {
-                  return res.json({
-                    message: "RESET Link is sent",
-                    value: true,
-                  });
-                })
-                .catch((e) => {
-                  return res.json({
-                    message: "error occured while sending mail",
-                    value: e,
-                  });
-                });
+              const message = `<p>We heard that you lost your pasword . </p> 
+              <p>Don't worry, use the link below to reset it.</p>
+              <p>This link <b>expires in 6 hours</b>.</p>
+              <p>Enter the user id and reset token after going to this link</p>
+              <a href="https://jnwbhutansuperfablab.bt/resetpassword">Reset Password</a>
+              <p>User ID: ${id} </p>
+              <p>Reset Token:  ${resetString} </p>`
+              const subject = "Passsword Reset Link"
+              SendEmail(email,message,subject)
             })
             .catch((error) => {
               return res.json({
