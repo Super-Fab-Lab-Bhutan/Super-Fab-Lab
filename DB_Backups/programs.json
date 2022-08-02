@@ -1,0 +1,234 @@
+[{
+  "_id": {
+    "$oid": "6274bfe1a21c763fd5c5c937"
+  },
+  "title": "STEM program             ",
+  "description": "<p style=\"text-align: center;\"><strong>Coming Soon...</strong></p>\r\n<p style=\"text-align: left;\">This program will be co-created with educators, hackers and makers, and stakeholders with the aim of incorporating digital fabrication in STEM education.<br>This program will focus on developing interest in STEM and providing students with an applied learning platform to enable further exploration of interests and knowledge.<br>Some of the STEM Programs in ideation are: Programming Electronic design and fabrication Design thinking and creating Prototyping Digital Fabrication Use of machine and Machining programs</p>",
+  "type": "Education",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1652077230209"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654255398324"
+    }
+  },
+  "image": "uploads/images/1654255398320-stem.jpg"
+},{
+  "_id": {
+    "$oid": "6274c0bba21c763fd5c5c93d"
+  },
+  "title": "Induction Program    ",
+  "description": "<p>As the first step to using the machines in the lab, users will be engaged through induction training to help familiarize them with the lab rules and the machines they have access to. <br>SFL machines are categorized into different levels based on their complexity, skill requirements, and associated risks. With this in mind, standard induction training for the use of machines and the lab has been developed.<br>The training program will consist of dos and don'ts and the standard operating procedures of the lab. For all the machines, separate training sessions and competency exams will be developed. <br>Machines are categorized into different levels(low, high, and intermediate). <br>First-time users and users in need of refresher training can attend the training and become competent in the use of the machines. Training will also vary depending on the users&rsquo; membership plan.</p>",
+  "type": "Education",
+  "__v": 0,
+  "image": "uploads/images/1654255551121-induction.jpg",
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654255551124"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6274c0e2a21c763fd5c5c940"
+  },
+  "title": "Operate our Machines     ",
+  "description": "<p>Super Fab Lab has more than 30 machines, ranging from basic machines requiring minimal skills to advanced machines which require advanced skills.</p>\r\n<p>We can provide training for all the machines in the lab. Our training programs are designed to fit your needs. We will provide basic machine training, intermediate machine training and advanced&nbsp;machine training</p>\r\n<p>Prerequisites such as 3D and 2D designing in CAD software that are needed for using the machines will also be taught.</p>",
+  "type": "Training",
+  "__v": 0,
+  "image": "uploads/images/1654257950505-manu.jpg",
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654257950509"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6274c0fca21c763fd5c5c943"
+  },
+  "title": "Personal Mobility Device: E-Scooter Program",
+  "description": "<p style=\"text-align: center;\"><strong>Coming Soon</strong></p>\r\n<p style=\"text-align: left;\">Druk Holding and Investments (DHI) has agreed to work in partnership with SHADO International Group Pte Ltd, a Singapore-based Electric Vehicle Technology company.</p>\r\n<p style=\"text-align: left;\">Based out of the Super Fab Lab, DHI and SHADO will design a program to distribute around sixty e-scooters to schools, technical training institutes, and colleges. The program will be centered around creating use cases for the scooters and designing and fabricating components for the scooter to promote the R&amp;D and adoption of &ldquo;battery-based technology&rdquo;. To aid this, DHI and SHADO will also develop a curriculum as a program component to supplement local talent development.</p>\r\n<p style=\"text-align: left;\">&nbsp;</p>",
+  "type": "Education",
+  "__v": 0,
+  "image": "uploads/images/1653043526002-workshop.jpg",
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654016590785"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6274c16ba21c763fd5c5c946"
+  },
+  "title": "Fab In a Box Project   ",
+  "description": "<p>Design and manufacture a multifunctional machine with the minimum functionality of CNC Milling, Fused Deposition Extrusion and CNC cutting.</p>\r\n<p>The machine will be easily manufactured in the SFL with almost 80% of the hardware parts and all the electronics boards made in SFL making the machines cost-efficient.</p>\r\n<p>It will also be user-friendly. A minimum of 10 Fab-in-a-box machines will be manufactured and distributed to the schools with an aim to help build a small maker space in the schools.</p>",
+  "type": "Research",
+  "__v": 0,
+  "image": "",
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654017143609"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "6274cb22a21c763fd5c5c981"
+  },
+  "title": "MODULAR DRONE ASSEMBLY   ",
+  "description": "<p>Design and manufacture modular drones using the Super Fab Lab, which includes the primary module which is a &ldquo;functional voxel&rdquo; which handles mechanical, electrical, and power routing, as well as the secondary modules (rotor, power, and controller voxels).</p>\r\n<p>This will allow us to put together different multi-rotor drones of different configurations together rapidly so that they can be used for a multitude of different purposes.</p>",
+  "type": "Research",
+  "__v": 0,
+  "image": "uploads/images/1653043598425-modular_drone.jpg",
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654001454928"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62964c371e2f99912cea9ca1"
+  },
+  "title": "FOLDED FIXED WING DRONE  ",
+  "description": "<p dir=\"ltr\">&nbsp;Design foldable fixed-wing drones and manufacture them in the SuperFablab.</p>\r\n<p dir=\"ltr\">The foldable fixed-wing drone will be designed from a simple 2D plan, upon which the 3D model can be developed and the electronics can be mounted upon. The drone will have longer ranges of flights and therefore this drone will be able to assist the country in logistics and delivery services, focusing on delivering urgently required medical equipment along with essentials to the remote and hard to access parts of the country. Along with the logistics, the aim is to have a drone that can also possibly assist with mapping and surveillance of said obscure parts of the country and inspection of power lines (not to be confused with the transmission towers)</p>\r\n<p>&nbsp;</p>",
+  "image": "",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654017079006"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654017079008"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222532688"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629708b3cbe747f975366a39"
+  },
+  "title": "Folded Fixed wing drone ",
+  "description": "<p dir=\"ltr\">&nbsp;Design foldable fixed-wing drones and manufacture them in the SuperFablab.</p>\r\n<p dir=\"ltr\">The foldable fixed-wing drone will be designed from a simple 2D plan, upon which the 3D model can be developed and the electronics can be mounted upon. The drone will have longer ranges of flights and therefore this drone will be able to assist the country in logistics and delivery services, focusing on delivering urgently required medical equipment along with essentials to the remote and hard to access parts of the country. Along with the logistics, the aim is to have a drone that can also possibly assist with mapping and surveillance of said obscure parts of the country and inspection of power lines (not to be confused with the transmission towers)</p>",
+  "image": "uploads/images/1654081444914-phoenix.png",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654065331748"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654065331750"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222445531"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62970992cbe747f975366a4f"
+  },
+  "title": "Motors and Drive ",
+  "description": "<p dir=\"ltr\">Design a switched reluctance motor and fabricate it in the Super Fablab. The team will begin by working on dynamometers as it is necessary to create speed torque efficiency curves in order to gain a real understanding of a motor's strengths and weaknesses.</p>\r\n<p dir=\"ltr\">After the dynamometer, the team will then begin the motor design, initially starting small (in the tens scale for Watts) and then scaling up to large motor sizes as desired. Reverse engineering of an off-the-shelf switched reluctance motor will be conducted and Finite element analysis (FEA) will be explored. Design optimized control methods for controlling the torque ripple from the motors.</p>",
+  "image": "",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654065554395"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654065554395"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222432390"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629748551e2f99912cea9e95"
+  },
+  "title": "PLASTIC WASTE TO FILAMENT/PELLETS ",
+  "description": "<p>The goal of this project is to design a machine that will process plastic waste material such as PET bottles and caps into something useful such as filament for 3D printing or plastic pellets that can be utilized in other industries.</p>\r\n<p>This will not only add value to recyclable waste material but also reduce the amount of waste that ends up in the landfill. This project will be conducted by Super Fab Lab, Bhutan in collaboration with CBA, MIT. The time limit for this project is one year (February 2022 - February 2023)</p>",
+  "image": "",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654081621143"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654081621146"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222421117"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629748b51e2f99912cea9e99"
+  },
+  "title": "BIOMATERIALS IN MANUFACTURING ",
+  "description": "<p dir=\"ltr\">The goal of this project is to create a recipe using the most ubiquitous biowastes in the lab and the city.&nbsp; The resulting biomaterial will be used in manufacturing and 3D printing.</p>\r\n<p dir=\"ltr\">The biomaterial will be created by experimenting with different combinations of biowastes such as eggshells, fruit peels, and wood wastes with agar and gelatin. A possible result of this project is a bio gel material that can be used for 3D Printing in the clank fxy machine (fab in a box project that is being conducted parallelly with this project.) Collaboration with the Bio Fab Lab at the College of Natural Resources in Lobesa will be explored.&nbsp;</p>\r\n<p>&nbsp;</p>",
+  "image": "",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654081717287"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654081717288"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222409517"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629748e01e2f99912cea9e9d"
+  },
+  "title": "Antenna and radio for regional data network ",
+  "description": "<p>To test communication technologies in the rugged and steep terrain of Bhutan, an antenna will be designed, fabricated, and test electronic circuits using various communication technologies (e,g LoRa, Xbee, etc.)</p>",
+  "image": "",
+  "type": "Research",
+  "timeCreated": {
+    "$date": {
+      "$numberLong": "1654081760496"
+    }
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654081760496"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654222390470"
+    }
+  },
+  "__v": 0
+}]

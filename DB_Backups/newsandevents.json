@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "62c2a853e8e5c22d73ea6a83"
+  },
+  "title": "JNW Makers program",
+  "description": "<p><span style=\"background-color: rgb(255, 255, 255);\">JNW Super Fablab will be conducting its first-ever Makers program with 25&nbsp; teachers from various schools and volunteer teachers from 7th till 29th July. The program is divided into two parts:</span></p>\r\n<p><span style=\"background-color: rgb(255, 255, 255);\"> In the first part, the teachers will be trained in using the machines in the lab, and in t</span><span style=\"background-color: rgb(255, 255, 255);\">he second phase will be taking place in August, where students will participate in making projects along with the trained teachers.&nbsp;</span></p>",
+  "image": "uploads/images/1656924243973-dhitechhack.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1656924243988"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1656924667870"
+    }
+  },
+  "__v": 0
+}]

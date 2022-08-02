@@ -1,0 +1,209 @@
+[{
+  "_id": {
+    "$oid": "629a466ef7bea70dc0d46e29"
+  },
+  "image": "uploads/gallery/1654277742467-zund.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277742478"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277742478"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a4677f7bea70dc0d46e2c"
+  },
+  "image": "uploads/gallery/1654277751285-tie.jpeg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277751288"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277751288"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a467ef7bea70dc0d46e2f"
+  },
+  "image": "uploads/gallery/1654277758496-takmill .jpeg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277758498"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277758498"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a4686f7bea70dc0d46e32"
+  },
+  "image": "uploads/gallery/1654277766570-sodick.png",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277766573"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277766573"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a468df7bea70dc0d46e35"
+  },
+  "image": "uploads/gallery/1654277773140-shopbot.jpeg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277773142"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277773142"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a46b7f7bea70dc0d46e38"
+  },
+  "image": "uploads/gallery/1654277815012-shaper.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277815014"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277815014"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a46c3f7bea70dc0d46e3b"
+  },
+  "image": "uploads/gallery/1654277827237-roland-vinyl-cutter-gsc-24-500x500.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277827239"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277827239"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a46e1f7bea70dc0d46e3e"
+  },
+  "image": "uploads/gallery/1654277857025-roland.jpeg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277857026"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277857026"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a46ebf7bea70dc0d46e41"
+  },
+  "image": "uploads/gallery/1654277867863-rent-3d-scanner-artec-eva.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277867865"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277867865"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a46fdf7bea70dc0d46e44"
+  },
+  "image": "uploads/gallery/1654277885491-Mechatronika-MX80.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277885493"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277885493"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a470af7bea70dc0d46e47"
+  },
+  "image": "uploads/gallery/1654277898427-laser400.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277898429"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277898429"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a4724f7bea70dc0d46e4a"
+  },
+  "image": "uploads/gallery/1654277924069-jlk.png",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277924072"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277924072"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629a473cf7bea70dc0d46e4d"
+  },
+  "image": "uploads/gallery/1654277948567-cnc vertiocal.jpg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654277948569"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654277948569"
+    }
+  },
+  "__v": 0
+}]

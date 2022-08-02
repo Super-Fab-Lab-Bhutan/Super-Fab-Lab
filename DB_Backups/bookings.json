@@ -1,0 +1,53 @@
+[{
+  "_id": {
+    "$oid": "62debbd70b0c38d62e03b01c"
+  },
+  "EquipmentId": "6260500ebf78573b17fdaf9c",
+  "EquipmentName": "ShopBot ",
+  "EquipmentType": "Carpentry",
+  "userID": "62a2d526f7bea70dc0d49e9b",
+  "UserName": "Jigme Nidup",
+  "UserEmail": "jigmenidup8102003@gmail.com",
+  "UserPhone": "97577386150",
+  "UserOrganization": "JigmeCom",
+  "date": "2022-07-25",
+  "time": "09:30-10:30",
+  "times": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1658764247998"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1658764252079"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62debbdc0b0c38d62e03b049"
+  },
+  "EquipmentId": "6260500ebf78573b17fdaf9c",
+  "EquipmentName": "ShopBot ",
+  "EquipmentType": "Carpentry",
+  "userID": "62a2d526f7bea70dc0d49e9b",
+  "UserName": "Jigme Nidup",
+  "UserEmail": "jigmenidup8102003@gmail.com",
+  "UserPhone": "97577386150",
+  "UserOrganization": "JigmeCom",
+  "date": "2022-07-25",
+  "time": "11:30-12:30",
+  "times": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1658764252011"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1658764252079"
+    }
+  },
+  "__v": 0
+}]
