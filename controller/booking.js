@@ -216,21 +216,33 @@ exports.getPrevBookings = async (req, res) => {
     let UserBooking = await Booking.find({ user: userId, date: date });
 
     let Data = [];
-    let listTime = [
-      "09:30-10:30",
-      "10:30-11:30",
-      "11:30-12:30",
-      "01:30-02:30",
-      "02:30-03:30",
-      "03:30-04:30",
-      "04:30-05:30",
-      "05:30-06:30",
-    ];
+
 
     for (let i of equipment) {
       let booking = await Booking.find({ date: date });
       let Time = [];
 
+
+      let listTime = [];
+      
+      if (i.EquipmentName.includes("3d")) {
+        listTime = [
+          "09:30-12:30",
+          "01:30-06:30",
+        ];
+      }
+      else {
+        listTime = [
+          "09:30-10:30",
+          "10:30-11:30",
+          "11:30-12:30",
+          "01:30-02:30",
+          "02:30-03:30",
+          "03:30-04:30",
+          "04:30-05:30",
+          "05:30-06:30",
+        ];
+      }
       // construct a list
       for (let x of listTime) {
         Time.push({
