@@ -33,16 +33,15 @@ exports.deleteBooking = async (req, res) => {
 };
 
 exports.getBookingInduction = async (req, res) => {
-  const { date } = req.body
+  const { date } = req.body;
 
-  const data = await bookingInduction.find({ date })
-  res.json(data)
-}
+  const data = await bookingInduction.find({ date });
+  res.json(data);
+};
 
 exports.viewBookingInduction = async (req, res) => {
   res.render("./adminpanel/booking/inductionBooking");
-}
-
+};
 
 exports.bookInduction = async (req, res) => {
   const { date, userID } = req.body;
@@ -104,12 +103,111 @@ exports.equipmentBooking = async (req, res) => {
       $and: [{ date: date }, { EquipmentId: EquipmentId }, { time: time }],
     });
 
-    if (booking == null) {
+    if (!EquipmentName.toLowerCase().includes("3d")) {
+      //logic for normal booking [not 3d printers]
+
+      if (booking == null) {
+        //1. if there is booking available at this time
+
+        const timeSlot = await Booking.findOne({
+          $and: [{ time: time }, { userID: userID }, { date: date }],
+        });
+
+        if (timeSlot == null) {
+          //2. if there is booking available and you have no other booking at same time slot
+          const noofbooking = await Booking.findOne({
+            $and: [
+              { userID: userID },
+              { EquipmentId: EquipmentId },
+              { date: date },
+            ],
+          });
+          let bookingtimes = 0;
+          if (noofbooking != null) {
+            bookingtimes = noofbooking.times;
+          }
+
+          if (bookingtimes < 3) {
+            //3. if for same equipment you have less than 3 bookings at same day
+            try {
+              await Booking.create({
+                time,
+                date,
+                EquipmentId,
+                EquipmentName,
+                userID,
+                EquipmentType,
+                UserName,
+                UserEmail,
+                UserPhone,
+                UserOrganization,
+              });
+              if (noofbooking != null) {
+                let newtimes = noofbooking.times + 1;
+
+                //update by adding 1 of number of booking for same equipment in same day by same user
+                await Booking.updateMany(
+                  { userID, EquipmentId, date },
+                  { $set: { times: newtimes } }
+                );
+              }
+              const data = {
+                time,
+                date,
+                EquipmentId,
+                EquipmentName,
+                userID,
+                EquipmentType,
+                UserName,
+                UserEmail,
+                UserPhone,
+                UserOrganization,
+              };
+              // sheets({ data });
+              const bid = "";
+              const subject = "Your Booking is Confirmed. Booking ID: " + bid;
+              const message = `Equipment: ${EquipmentName}<br>Equipment ID: ${EquipmentType}<br>TIme: ${time}</br>Date: ${date}`;
+              // SendEmail(UserEmail, message, subject);
+            } catch (e) {
+              console.log(e);
+            }
+            return res.json({
+              message: "Your Booking is Confirmed",
+              value: "true",
+            });
+          } else {
+            return res.json({
+              message: "equipment already booked more than only",
+              value: "false",
+            });
+          }
+        } else {
+          return res.json({
+            message: "you already have a booking at this time",
+            value: "false",
+          });
+        }
+      } else {
+        return res.json({
+          message:
+            "Booking for this Equipment at this time is already done.Please Try another time.",
+          value: "false",
+        });
+      }
+    } else {
+      //logic for 3d printers
       const timeSlot = await Booking.findOne({
-        $and: [{ time: time }, { userID: userID }, { date: date }],
+        $and: [
+          { time: time },
+          { userID: userID },
+          { EquipmentId: EquipmentId },
+          { date: date },
+        ],
       });
 
       if (timeSlot == null) {
+        //2. if there is booking available and you have no other booking at same time slot and same machine
+
         const noofbooking = await Booking.findOne({
           $and: [
             { userID: userID },
@@ -117,73 +215,84 @@ exports.equipmentBooking = async (req, res) => {
             { date: date },
           ],
         });
+        let bookingtimes = 0;
         if (noofbooking != null) {
-          var bookingtimes = noofbooking.times;
-        } else {
-          var bookingtimes = 0;
+          bookingtimes = noofbooking.times;
         }
-        if (bookingtimes < 3) {
-          try {
-            await Booking.create({
-              time,
-              date,
-              EquipmentId,
-              EquipmentName,
-              userID,
-              EquipmentType,
-              UserName,
-              UserEmail,
-              UserPhone,
-              UserOrganization,
-            });
-            if (noofbooking != null) {
-              var newtimes = noofbooking.times + 1;
 
-              await Booking.updateMany({
-                $and: [{ userID }, { EquipmentId }],
-                times: newtimes,
+        const totalbooking = await Booking.find({
+          $and: [{ EquipmentId: EquipmentId }, { date: date }],
+        });
+        // console.log(totalbooking);
+        //number of booking should not exceed certain number
+        if (totalbooking.length < 3) {
+          if (bookingtimes < 2) {
+            // if for same equipment you have less than 6 bookings at same day for same equipment and time
+            try {
+              await Booking.create({
+                time,
+                date,
+                EquipmentId,
+                EquipmentName,
+                userID,
+                EquipmentType,
+                UserName,
+                UserEmail,
+                UserPhone,
+                UserOrganization,
               });
+              if (noofbooking != null) {
+                var newtimes = noofbooking.times + 1;
+
+                //update by adding 1 of number of booking for same equipment in same day by same user
+                await Booking.updateMany(
+                  { userID, EquipmentId, date },
+                  { $set: { times: newtimes } }
+                );
+              }
+              const data = {
+                time,
+                date,
+                EquipmentId,
+                EquipmentName,
+                userID,
+                EquipmentType,
+                UserName,
+                UserEmail,
+                UserPhone,
+                UserOrganization,
+              };
+              // sheets({ data });
+              const bid = "";
+              const subject = "Your Booking is Confirmed. Booking ID: " + bid;
+              const message = `Equipment: ${EquipmentName}<br>Equipment ID: ${EquipmentType}<br>TIme: ${time}</br>Date: ${date}`;
+              // SendEmail(UserEmail, message, subject);
+            } catch (e) {
+              console.log(e);
             }
-            const data = {
-              time,
-              date,
-              EquipmentId,
-              EquipmentName,
-              userID,
-              EquipmentType,
-              UserName,
-              UserEmail,
-              UserPhone,
-              UserOrganization,
-            }
-            sheets({ data })
-            const bid = booking._id.valueOf()
-            const subject = "Your Booking is Confirmed. Booking ID: " + bid;
-            const message = `Equipment: ${EquipmentName}<br>Equipment ID: ${EquipmentType}<br>TIme: ${time}</br>Date: ${date}`
-            SendEmail(UserEmail, message, subject)
-          } catch (e) {
-            console.log(e);
+            return res.json({
+              message: "Your Booking is Confirmed",
+              value: "true",
+            });
+          } else {
+            return res.json({
+              message: "equipment already booked more than only",
+              value: "false",
+            });
           }
-          return res.json({
-            message: "Your Booking is Confirmed",
-            value: "true",
-          });
         } else {
           return res.json({
-            message: "equipment already booked more than only",
+            message:
+              "Total allocated number of booking for this slot is filled",
+            value: "false",
           });
         }
       } else {
         return res.json({
           message: "you already have a booking at this time",
-          value: "true",
+          value: "false",
         });
       }
-    } else {
-      return res.json({
-        message:
-          "Booking for this Equipment at this time is already done.Please Try another time.",
-      });
     }
   }
 };
@@ -213,25 +322,17 @@ exports.getPrevBookings = async (req, res) => {
       equipment = await Equipment.find({});
     }
 
-    let UserBooking = await Booking.find({ user: userId, date: date });
-
     let Data = [];
-
-
     for (let i of equipment) {
       let booking = await Booking.find({ date: date });
       let Time = [];
 
-
       let listTime = [];
-      
-      if (i.EquipmentName.includes("3d")) {
-        listTime = [
-          "09:30-12:30",
-          "01:30-06:30",
-        ];
-      }
-      else {
+      let checkFor3DPrinter = false; //check if equipment is 3d printer or not
+      if (i.equipmentName.toLowerCase().includes("3d")) {
+        checkFor3DPrinter = true;
+        listTime = ["09:30-12:30", "01:30-06:30"];
+      } else {
         listTime = [
           "09:30-10:30",
           "10:30-11:30",
@@ -253,30 +354,55 @@ exports.getPrevBookings = async (req, res) => {
       // populate the list
       let e = i.id;
       let k = 0;
-      for (let i of listTime) {
+      for (let time of listTime) {
         for (let j of booking) {
           //check for general booking
-          if (i == j.time && e == j.EquipmentId) {
+          if (time == j.time && e == j.EquipmentId) {
             //check for user booking
-            for (let l of UserBooking) {
-              if ((i = l.time && date == l.date && e == l.EquipmentId)) {
+            if (!checkFor3DPrinter) {
+              //normal equipments logic
+              if (userId == j.userID) {
                 Time[k] = {
-                  time: i,
+                  time: time,
                   booked: 1, //booked by user
                 };
-                break;
               } else {
                 Time[k] = {
-                  time: i,
+                  time: time,
+                  booked: 0, //booked
+                };
+              }
+            } else {
+              let totalAvailable = 3;
+              let totalbooking;
+              try {
+                totalbooking = await Booking.find({
+                  $and: [{ EquipmentId: e }, { date: date }],
+                });
+              } catch (error) {
+                console.log(error.message);
+              }
+              if (userId == j.userID) {
+                Time[k] = {
+                  time: time,
+                  booked: 1, //booked by user
+                };
+              } else if (totalbooking.length < totalAvailable) {
+                Time[k] = {
+                  time: time,
+                  booked: 2, //available
+                };
+              } else {
+                Time[k] = {
+                  time: time,
                   booked: 0, //booked
                 };
               }
             }
-
             break;
           } else {
             Time[k] = {
-              time: i,
+              time: time,
               booked: 2, //not booked
             };
           }
@@ -292,7 +418,6 @@ exports.getPrevBookings = async (req, res) => {
       };
       Data.push(data);
     }
-
     return res.json(Data);
-  } catch (error) { }
+  } catch (error) {}
 };

@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
 
   await emailCheck(email)
     .then(function (res) {
-      valid = res;
+      valid = true;
     })
     .catch(function (err) {
       valid = false;

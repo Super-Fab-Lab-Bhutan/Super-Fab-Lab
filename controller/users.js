@@ -4,13 +4,12 @@ const PasswordReset = require("../model/forgotPassword");
 
 const bcrypt = require("bcryptjs");
 
-const { SendEmail } = require("../middleware/mailer");
-
+const { SendEmailHtml } = require("../middleware/mailer");
 
 exports.getProfile = async (req, res) => {
-  const id = req.body.userID;
-  const UserData = await User.findById({ _id: id });
-  const bookings = await Booking.find({ user: id });
+  const { userID, date } = req.body;
+  const UserData = await User.findById({ _id: userID });
+  const bookings = await Booking.find({ userID: userID, date: date });
   try {
     res.json({ UserData, bookings });
   } catch (e) {
@@ -43,7 +42,7 @@ exports.patchApprove = async (req, res) => {
   const message =
     "<p><b> Your Registration for SFL Registration is approved, Now you can log in for booking</b> </p>";
   const subject = "Registration approved!!";
-  SendEmail(user.email, message, subject);
+  SendEmailHtml(user.email, message, subject);
   res.redirect("/admin/users");
 };
 
@@ -60,11 +59,11 @@ exports.getApproval = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
-  const { email, redirectUrl } = req.body;
+  const { email } = req.body;
   newEmail = email;
   const exist = await User.findOne({ email: email });
   if (!!exist) {
-    sendResetEmail(exist.id, email, redirectUrl, res);
+    sendResetEmail(exist.id, email, res);
   } else {
     return res.json({
       message: "Email does not exist",
@@ -75,13 +74,11 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   const { userId, resetString, newPassword } = req.body;
-
   PasswordReset.find({ userId })
     .then((result) => {
       if (result.length > 0) {
         const { expiresAt } = result[0];
         const hashedResetString = result[0].uniqueString;
-
         if (expiresAt.getTime() < new Date().getTime()) {
           PasswordReset.deleteOne({ userId })
             .then(() => {
@@ -113,26 +110,26 @@ exports.resetPassword = async (req, res) => {
 
                         return res.json({
                           message: "Password Reset Sucessful",
-                          value: e,
+                          value: "true",
                         });
                       })
                       .catch((e) => {
                         return res.json({
                           message: "saving the password failed",
-                          value: e,
+                          value: "false",
                         });
                       });
                   })
                   .catch((e) => {
                     return res.json({
                       message: "hashing failed",
-                      value: e,
+                      value: "false",
                     });
                   });
               } else {
                 return res.json({
                   message: "Token does not match",
-                  value: e,
+                  value: "false",
                 });
               }
             })
@@ -158,11 +155,11 @@ exports.resetPassword = async (req, res) => {
     });
 };
 
-const sendResetEmail = (id, email, redirectUrl, res) => {
+const sendResetEmail = (id, email, res) => {
   const resetString = Math.random().toString(36).substring(2, 7) + id;
 
   const expiresAt = new Date();
-  expiresAt.setMinutes(expiresAt.getMinutes() + 360);
+  expiresAt.setMinutes(expiresAt.getMinutes() + 15); // expires in 15 minutes
 
   PasswordReset.deleteMany({ userId: id })
     .then((result) => {
@@ -180,13 +177,17 @@ const sendResetEmail = (id, email, redirectUrl, res) => {
             .then(() => {
               const message = `<p>We heard that you lost your pasword . </p> 
               <p>Don't worry, use the link below to reset it.</p>
-              <p>This link <b>expires in 6 hours</b>.</p>
-              <p>Enter the user id and reset token after going to this link</p>
-              <a href="https://jnwbhutansuperfablab.bt/resetpassword">Reset Password</a>
-              <p>User ID: ${id} </p>
-              <p>Reset Token:  ${resetString} </p>`
-              const subject = "Passsword Reset Link"
-              SendEmail(email,message,subject)
+              <p>This Token <b>expires in 15 minutes</b>.</p>
+              <p>Reset Token:  ${resetString} </p>
+              <p>Copy the reset token and enter it after going to this link</p>
+              <a href="${process.env.REACTSERVER}/resetpassword/${id}">Reset Password</a>`;
+              const subject = "Passsword Reset Link";
+              SendEmailHtml(email, message, subject);
+              return res.json({
+                message: "Email sent",
+                userID: id,
+                value: "true",
+              });
             })
             .catch((error) => {
               return res.json({
