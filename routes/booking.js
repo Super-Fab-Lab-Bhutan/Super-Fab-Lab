@@ -10,7 +10,9 @@ const {
   deleteBooking,
   postBookedEq,
   getBookingInduction,
-  viewBookingInduction
+  viewBookingInduction,
+  cancelBooking,
+  cancelInductionBooking
 
 } = require("../controller/booking");
 
@@ -32,5 +34,9 @@ router.post("/user/addBooking", equipmentBooking);
 router.post("/user/Bookings", getPrevBookings);
 
 router.post("/delete/booking", deleteBooking);
+
+router.post("/cancel/booking", cancelBooking);
+
+router.post("/cancel/InductionBooking", cancelInductionBooking);
 
 module.exports = router;

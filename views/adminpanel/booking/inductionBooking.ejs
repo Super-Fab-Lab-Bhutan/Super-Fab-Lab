@@ -22,6 +22,7 @@
                     <tr>
                         <th scope="col" data-column="Details" data-order="desc">User Details &#9650</th>
                         <th scope="col" data-column="Time" data-order="desc">Time &#9650</th>
+                        <th scope="col">Deletion</th>
                     </tr>
                 </thead>
             </span>
@@ -83,6 +84,30 @@
                 } catch (err) {
                     console.log(err.message)
                 }
+                const s = document.querySelector("*[name='delete']");
+                s.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    var message = prompt("Please enter the reason for cancellation");
+                    var id = $("*[name='delete']").attr('id')
+                    if (message == null || message == "") {
+
+                        return
+                    } else {
+                        try {
+                            const res = await fetch('/cancel/InductionBooking', {
+                                method: 'POST',
+                                body: JSON.stringify({ id, message }),
+                                headers: { 'Content-Type': 'application/json' }
+                            })
+                            dataArray = await res.json();
+                            alert(dataArray)
+                            //if(!alert(dataArray)){window.location.reload();}
+                        } catch (err) {
+                            console.log(err.message)
+                        }
+                    }
+
+                });
             } else {
                 alert('Input type date is empty or Invalid Date\nOnly Thursday and Friday Available');
             }
@@ -109,7 +134,11 @@
                   Booked on: ${data[i].createdAt}
               </td>
               <td>${data[i].time}</td>
-					  </tr>`
+              <td>
+              <form><button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}">Cancel</button></form>
+              </td>
+					  </tr>
+                    `
                 table.innerHTML += row
             }
         }

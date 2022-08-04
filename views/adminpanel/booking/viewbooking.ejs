@@ -1,5 +1,9 @@
 <%- include('../partials/header.ejs') %>
+  <script>
 
+
+
+  </script>
   <div class="container-fluid">
     <div class="container">
       <h1><b>Equipment Bookings</b></h1>
@@ -24,12 +28,15 @@
             <th scope="col" data-column="Type" data-order="desc">Type &#9650</th>
             <th scope="col" data-column="Details" data-order="desc">User Details &#9650</th>
             <th scope="col" data-column="Time" data-order="desc">Time &#9650</th>
+            <th scope="col">Deletion</th>
           </tr>
         </thead>
       </span>
       <tbody id="myTable">
         <tr>
-          <td colspan="4" style='text-align:center; vertical-align:middle'><h1><b>Select Date</b></h1></td>
+          <td colspan="4" style='text-align:center; vertical-align:middle'>
+            <h1><b>Select Date</b></h1>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -37,8 +44,12 @@
   </div>
   </p>
   <script>
+
+
+
+
     var dataArray = [];
-    
+
     $('#search-input').on('keyup', function () {
       var value = $(this).val()
       var data = searchTable(value, dataArray)
@@ -83,6 +94,30 @@
         } catch (err) {
           console.log(err.message)
         }
+        const s = document.querySelector("*[name='delete']");
+        s.addEventListener('click', async (e) => {
+          e.preventDefault();
+          var message = prompt("Please enter the reason for cancellation");
+          var id = $("*[name='delete']").attr('id')
+          if (message == null || message == "") {
+
+            return
+          } else {
+            try {
+              const res = await fetch('/cancel/booking', {
+                method: 'POST',
+                body: JSON.stringify({ id, message }),
+                headers: { 'Content-Type': 'application/json' }
+              })
+              dataArray = await res.json();
+              alert(dataArray)
+              //if(!alert(dataArray)){window.location.reload();}
+            } catch (err) {
+              console.log(err.message)
+            }
+          }
+
+        });
       } else {
         alert('Input type date is empty');
       }
@@ -110,6 +145,11 @@
                   ${data[i].UserPhone}</br>
               </td>
               <td>${data[i].time}</td>
+              <td>
+                <form>
+              <button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}">Cancel</button>
+              </form>
+              </td>
 					  </tr>`
         table.innerHTML += row
       }
@@ -119,13 +159,14 @@
       var filterdata = []
       for (var i = 0; i < data.length; i++) {
         value = value.toLowerCase()
-        var name = data[i]._id.toLowerCase()+data[i].EquipmentName.toLowerCase() + data[i].EquipmentType.toLowerCase() + data[i].UserName.toLowerCase() + data[i].UserOrganization.toLowerCase() + data[i].time.toLowerCase()
+        var name = data[i]._id.toLowerCase() + data[i].EquipmentName.toLowerCase() + data[i].EquipmentType.toLowerCase() + data[i].UserName.toLowerCase() + data[i].UserOrganization.toLowerCase() + data[i].time.toLowerCase()
         if (name.includes(value)) {
           filterdata.push(data[i])
         }
       }
       return filterdata
     }
+
   </script>
 
   </div>

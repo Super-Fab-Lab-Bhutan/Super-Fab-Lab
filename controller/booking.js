@@ -1,5 +1,5 @@
 const { sheets } = require("../middleware/uploadToSheets");
-const { SendEmail } = require("../middleware/mailer");
+const { SendEmail, SendEmailHtml } = require("../middleware/mailer");
 const Booking = require("../model/booking");
 const bookingInduction = require("../model/bookingInduction");
 const Equipment = require("../model/equipment");
@@ -19,18 +19,32 @@ exports.deleteBooking = async (req, res) => {
   try {
     const { id, userID } = req.body;
     const booking = await Booking.findOne({ userID: userID });
-    const message = "The Booking has been canceled";
+    const message = "The Booking has been Cancelled";
     const UserEmail = booking.UserEmail;
     await Booking.findByIdAndDelete({ _id: id });
-    /*mail
-          .sendMail(UserEmail, message)
-          .then((result) => console.log("Email sent...", result))
-          .catch((error) => console.log(error.message));*/
+    SendEmailHtml(UserEmail, message, "Booking Cancellation");
     res.json(true);
   } catch (e) {
     res.json(false);
   }
 };
+
+exports.cancelBooking = async (req, res) => {
+  const {id,message} = req.body;
+  const userinfo=await Booking.findById(id);
+  await Booking.findByIdAndDelete(id);
+  SendEmailHtml(userinfo.UserEmail,message,"Booking Cancellation")
+  res.json("Cancellation Sucessful");
+}
+
+exports.cancelInductionBooking = async (req, res) => {
+  const {id,message} = req.body;
+  const userinfo=await bookingInduction.findById(id);
+  await bookingInduction.findByIdAndDelete(id);
+  SendEmailHtml(userinfo.UserEmail,message,"Booking Cancellation")
+  res.json("Cancellation Sucessful");
+}
+
 
 exports.getBookingInduction = async (req, res) => {
   const { date } = req.body;
@@ -419,5 +433,5 @@ exports.getPrevBookings = async (req, res) => {
       Data.push(data);
     }
     return res.json(Data);
-  } catch (error) {}
+  } catch (error) { }
 };
