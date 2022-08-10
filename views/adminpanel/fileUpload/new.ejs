@@ -1,52 +1,72 @@
-<%- include('../partials/header.ejs')  %>
-<main class="container">
+<%- include('../partials/header.ejs') %>
+  <main class="container">
 
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <h1 class="display-6">New File</h1>
-      <form action="/addFile" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" name="name" id="name" placeholder="Title">
-        </div>
-        <select class="form-select" aria-label="Default select example" id="type" name="type">
-          <option selected>Select the type of Equipment</option>
-          <option value="Resource">Training Resource</option>
-          <option value="Manual">Machine Manuals</option>
-          <option value="Video">Youtube Link</option>
-        </select>
-        <br><br>
-        <select class="form-select" aria-label="Default select example" id="Uploadtype" name="Uploadtype">
-          <option selected value="File">File</option>
-          <option value="Link">Link</option>
-        </select>
-        <br>
-        <br>
-        <script>
-          $('select').on('change', function() {
-            
-            
-            if (this.value == "Video" || this.value == "Link" ) {
-              var szData = '<label for="FileUrl" class="form-label">URL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
-              $('.ss').html(szData)
-            } else {
-              var s = '<label for="image" class="form-label">Uplaod</label><br> <input type="file" id="file" name="file"><br> (only pdf accepted if its something besides that the file will not be uploaded but only the content will get uploaded)'
-              $('.ss').html(s)
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <h1 class="display-6">New File</h1>
+        <form action="/addFile" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Title">
+          </div>
+          <select class="form-select" aria-label="Default select example" id="type" name="type">
+            <option selected>Select the type of Equipment</option>
+            <option value="Resource">Training Resource</option>
+            <option value="Manual">Machine Manuals</option>
+            <option value="Video">Youtube Link</option>
+          </select>
+          <br><br>
+          <select class="form-select" aria-label="Default select example" id="Uploadtype" name="Uploadtype">
+            <option selected>Select upload option</option>
+            <option value="File">File</option>
+            <option value="Link">Link</option>
+          </select>
+          <br>
+          <br>
+          <script>
+            const change = () => {
+              var s;
+              $('#Uploadtype').on('change', function () {
+                
+                if (this.value == "Link") {
+                   s = '<label for="FileUrl" class="form-label">URL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
+                  $('.ss').html(s)
+                } else if(this.value == "File"){
+                  
+                  if (document.getElementById('type').value == "Video") {
+                    alert("Can only use links for Youtube videos")
+                    s = '<label for="FileUrl" class="form-label">URL</label> <input type="text" class="form-control" name="FileUrl" id="FileUrl" placeholder="Url">'
+
+                  } else {
+                     s = '<label for="image" class="form-label">Uplaod</label><br> <input type="file" id="file" name="file"><br> (only pdf accepted if its something besides that the file will not be uploaded but only the content will get uploaded)'
+
+                  }
+                  $('.ss').html(s)
+                }
+              });
             }
-          });
-        </script>
-        <div class="mb-3 ss">
-
-        </div>
-
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" name="description" id="description" rows="5" placeholder="Description"></textarea>
-        </div>
+            $('#type').on('change', function () {
+              $('#Uploadtype').prop('selectedIndex',0)
+              change()
+              s=""
+              $('.ss').html(s)
+            });
 
 
-        <button type="submit" class="btn btn-success btn-small">Submit</button>
-      </form>
+          </script>
+          <div class="mb-3 ss">
+
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="5"
+              placeholder="Description"></textarea>
+          </div>
+
+
+          <button type="submit" class="btn btn-success btn-small">Submit</button>
+        </form>
+      </div>
     </div>
-  </div>
-</main>
+  </main>
