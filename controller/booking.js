@@ -16,16 +16,23 @@ exports.postBookedEq = async (req, res) => {
 };
 
 exports.deleteBooking = async (req, res) => {
-  try {
-    const { id, userID } = req.body;
-    const booking = await Booking.findOne({ userID: userID });
-    const message = "The Booking has been Cancelled";
-    const UserEmail = booking.UserEmail;
-    await Booking.findByIdAndDelete({ _id: id });
-    SendEmailHtml(UserEmail, message, "Booking Cancellation");
-    res.json(true);
-  } catch (e) {
-    res.json(false);
+  const { id, userID } = req.body;
+  const booking = await Booking.findOne({ userID: userID });
+  const message = "The Booking has been Cancelled";
+  const UserEmail = booking.UserEmail;
+  const date = booking.date;
+  const today = new Date().toJSON().substring(0, 10)
+  if (today == date) {
+    const message = "The Booking Cannot be cancelled on the date of booking";
+    return res.json(false, message);   
+  } else {
+    try {
+      await Booking.findByIdAndDelete({ _id: id });
+      SendEmailHtml(UserEmail, message, "Booking Cancellation");
+      return res.json(true);
+    } catch (e) {
+      res.json(false);
+    }
   }
 };
 
