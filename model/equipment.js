@@ -21,7 +21,7 @@ const equipmentSchema = new Mongoose.Schema(
     startup: {
       type: Boolean,
     },
-    communtiy: {
+    community: {
       type: Boolean,
     },
     student: {
