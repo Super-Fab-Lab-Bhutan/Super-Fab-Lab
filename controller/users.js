@@ -19,8 +19,13 @@ exports.getProfile = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   const user = await User.find({ role: { $ne: "admin" } });
-  res.render("./adminpanel/viewusers/viewusers", { users: user });
+  res.render("./adminpanel/viewusers/viewusers");
 };
+
+exports.getUsersData = async (req, res) => {
+  const user = await User.find({ role: { $ne: "admin" } });
+  res.json(user)
+}
 
 exports.editUsers = async (req, res) => {
   const { id } = req.params;

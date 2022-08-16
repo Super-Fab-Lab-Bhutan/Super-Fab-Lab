@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <h1 class="display-6">Add Image</h1>
+      <h1 class="display-6">Add an Image to Gallery</h1><hr>
       <form action="/admin/addgallery" method="POST" enctype="multipart/form-data">
 
         <div class="mb-3">
@@ -25,7 +25,7 @@
       <div class="card mx-auto" style="width: 20rem;">
         <img src="<%=i.image%>" class="card-img-top" alt="...">
         <form class="d-inline-block" action="/admin/gallery/<%= i.id %>?_method=DELETE" method="POST">
-          <button class="btn btn-danger btn-small">Delete</button>
+          <center><button class="btn btn-danger btn-small">Delete</button></center>
         </form>
       </div>
     </div>

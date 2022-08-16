@@ -11,7 +11,8 @@ const {
   deleteUser,
   getApproval,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  getUsersData
 } = require("../controller/users");
 
 /** Client Side API **/
@@ -25,6 +26,8 @@ router.post("/resetPassword", resetPassword);
 /** Admin Side API **/
 
 router.get("/admin/users", adminAuth, getUsers);
+
+router.get("/admin/getusers", adminAuth, getUsersData);
 
 router.get("/viewusers/:id/edit", adminAuth, editUsers);
 

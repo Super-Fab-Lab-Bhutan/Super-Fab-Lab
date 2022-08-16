@@ -13,10 +13,8 @@ const {
 
 const {
   getEquipment,
-  getAdminElectronic,
-  getAdminCarpentry,
-  getAdminMetal,
-  getAdminHeavy,
+  getAdminEquipments,
+
   postEquipment,
   newEquipment,
   editEquipment,
@@ -35,16 +33,9 @@ router.get("/machines/heavy-machinary", getHeavy);
 router.get("/machines/metal-works", getMetal);
 
 /** Admin Side API **/
-
 router.get("/admin/equipment", adminAuth, getEquipment);
 
-router.get("/admin/equipment/carpentry", adminAuth, getAdminCarpentry);
-
-router.get("/admin/equipment/electronic", adminAuth, getAdminElectronic);
-
-router.get("/admin/equipment/metal", adminAuth, getAdminMetal);
-
-router.get("/admin/equipment/heavy", adminAuth, getAdminHeavy);
+router.get("/admin/equipments", adminAuth, getAdminEquipments);
 
 router.get("/admin/equipment/new", adminAuth, newEquipment);
 

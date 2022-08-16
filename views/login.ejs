@@ -1,206 +1,318 @@
 <!DOCTYPE html>
 <!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Login Form</title>
-      <style>
-          @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-                *{
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: bell;
-                }
-                html,body{
-                display: grid;
-                height: 100%;
-                width: 100%;
-                place-items: center;
-                
-                /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
-                }
-                ::selection{
-                background: #3b70a8;
-                color: #fff;
-                }
-                .wrapper{
-                width: 380px;
-                background: #fff;
-                /* border-radius: 15px; */
-               /* box-shadow: 5px 15px 18px #f37b53;*/
-                }
-                .wrapper .title{
-                font-size: 35px;
-                font-weight: 600;
-                text-align: center;
-                
-                color: #000;
-                user-select: none;
-                /* border-radius: 15px 15px 0 0; */
-                background: #fff;
-                }
-                .wrapper form{
-                padding: 10px 30px 50px 30px;
-                }
-                .wrapper form .field{
-                height: 50px;
-                width: 100%;
-                margin-top: 20px;
-                position: relative;
-                }
-                .wrapper form .field input{
-                height: 45px;
-                width: 100%;
-                outline: none;
-                font-size: 18px;
-                padding-left: 20px;
-                border: 1px solid lightgrey;
-                border-radius: 5px;
-                border-bottom-width: 2px;
-                transition: all 0.3s ease;
-                }
-                .wrapper form .field input:focus,
-                form .field input:valid{
-                border-color: #3b70a8;;
-                }
-                .wrapper form .field label{
-                position: absolute;
-                top: 50%;
-                left: 20px;
-                color: #999999;
-                font-weight: 400;
-                font-size: 18px;
-                pointer-events: none;
-                transform: translateY(-50%);
-                transition: all 0.3s ease;
-                }
-                form .field input:focus ~ label,
-                form .field input:valid ~ label{
-                top: 0%;
-                font-size: 18px;
-                color: #3b70a8;;
-                background: #fff;
-                transform: translateY(-50%);
-                }
-                form .content{
-                display: flex;
-                width: 100%;
-                height: 50px;
-                font-size: 18px;
-                align-items: center;
-                justify-content: space-around;
-                }
-                form .content .checkbox{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                }
-                form .content input{
-                width: 15px;
-                height: 15px;
-                background: red;
-                }
-                form .content label{
-                color: #262626;
-                user-select: none;
-                padding-left: 5px;
-                }
-                form .content .pass-link{
-                color: "";
-                }
-                form .field input[type="submit"]{
-                /*color: #000;*/
-                border: 3px solid orange;
-                padding-left: 0;
-                margin-top: -10px;
-                font-size: 18px;
-                font-weight: 500;
-                cursor: pointer;
-                background: #fff;
-                transition: all 0.3s ease;
-                border-radius: 40px;
-                }
-                form .field input[type="submit"]:active{
-                transform: scale(0.95);
-                }
-                form .field input[type="submit"]:hover{
-                    border: 2px solid orange;
-                    background-color: orange;
-                    color: #fff;
-                }
-                form .signup-link{
-                color: #262626;
-                margin-top: 20px;
-                text-align: center;
-                text-decoration: none;
-                }
-                form .pass-link a,
-                form .signup-link a{
-                color: #3b70a8;;
-                text-decoration: none;
-                }
-                form .pass-link a:hover,
-                form .signup-link a:hover{
-                text-decoration: underline;
-                }
-      </style>
-   </head>
-   <body>
+  
+<head>
+  
+  <meta charset="utf-8">
+  
+  <title>SuperFabLab</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <base href='/'>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
-      <div class="wrapper" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 40px;">
-         <div class="title" style="border-radius: 40px;">
-            <img src="/img/logo.png" style="width: 250px; margin-top: 20px; height:255px;">
-            <h5>Admin Panel</h5>
-            </div>
-            
-          <form style="padding-top: 0px;">
-            <div class="error" style="background-color: red;"></div><br>
-            <div class="field">
-               <input type="text" required name="username" id="email">
-               <label>Email Address</label>
-            </div>
-            <div class="field">
-               <input type="password" required name="password" id="password">
-               <label name = "password">Password</label>
-            </div>
-            <div class="field">
-               <input type="submit" value="Login" >
-            </div>
-         </form>
-         
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: bell;
+    }
+
+    html,
+    body {
+      display: grid;
+      height: 100%;
+      width: 100%;
+      place-items: center;
+
+      /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+    }
+
+    ::selection {
+      background: #3b70a8;
+      color: #fff;
+    }
+
+    .wrapper {
+      width: 380px;
+      background: #fff;
+      /* border-radius: 15px; */
+      /* box-shadow: 5px 15px 18px #f37b53;*/
+    }
+
+    .wrapper .title {
+      font-size: 35px;
+      font-weight: 600;
+      text-align: center;
+
+      color: #000;
+      user-select: none;
+      /* border-radius: 15px 15px 0 0; */
+      background: #fff;
+    }
+
+    .wrapper form {
+      padding: 10px 30px 50px 30px;
+    }
+
+    .wrapper form .field {
+      height: 50px;
+      width: 100%;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .wrapper form .field input {
+      height: 45px;
+      width: 100%;
+      outline: none;
+      font-size: 18px;
+      padding-left: 20px;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      border-bottom-width: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .wrapper form .field input:focus,
+    form .field input:valid {
+      border-color: #3b70a8;
+      ;
+    }
+
+    .wrapper form .field label {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      color: #999999;
+      font-weight: 400;
+      font-size: 18px;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+    }
+
+    form .field input:focus~label,
+    form .field input:valid~label {
+      top: 0%;
+      font-size: 18px;
+      color: #3b70a8;
+      ;
+      background: #fff;
+      transform: translateY(-50%);
+    }
+
+    form .content {
+      display: flex;
+      width: 100%;
+      height: 50px;
+      font-size: 18px;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    form .content .checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    form .content input {
+      width: 15px;
+      height: 15px;
+      background: red;
+    }
+
+    form .content label {
+      color: #262626;
+      user-select: none;
+      padding-left: 5px;
+    }
+
+    form .content .pass-link {
+      color: "";
+    }
+
+    form .field input[type="submit"] {
+      /*color: #000;*/
+      border: 3px solid orange;
+      padding-left: 0;
+      margin-top: -10px;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.3s ease;
+      border-radius: 40px;
+    }
+
+    form .field input[type="submit"]:active {
+      transform: scale(0.95);
+    }
+
+    form .field input[type="submit"]:hover {
+      border: 2px solid orange;
+      background-color: orange;
+      color: #fff;
+    }
+
+    form .signup-link {
+      color: #262626;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    form .pass-link a,
+    form .signup-link a {
+      color: #3b70a8;
+      ;
+      text-decoration: none;
+    }
+
+    form .pass-link a:hover,
+    form .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+/>
+
+<link rel="stylesheet" href="assets/css/cs-skin-elastic.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+  <div class="alert alert-danger alert-dismissible fade hide" id="alert" role="alert">
+    <span id="showalert"></span>
+    <button  class="close" data-dismiss="alert" aria-label="Close" >
+      <span aria-hidden="true" onclick="close()">&times;</span>
+    </button>
+  </div>
+  <div class="wrapper" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 40px;">
+    
+    <div class="title" style="border-radius: 40px;">
+      <img src="/images/favicon.png" style="width: 250px; margin-top: 20px; height:255px;">
+    
+    </div>
+
+    <form style="padding-top: 0px;">
+      <div class="error" style="background-color: red;"></div><br>
+      <div class="field">
+        <input type="text" required name="username" id="email" >
+        <label>Email Address</label>
       </div>
+      <div class="field">
+        <input type="password" required name="password" id="password">
+        <label name="password">Password</label>
+      </div>
+      <div class="field">
+        <input type="submit" value="Login">
+      </div>
+    </form>
 
-   </body>
+    
+  
+  </div>
+
+</body>
+
 </html>
- 
-  <script>
-    const form = document.querySelector('form')
-    const email = document.querySelector('#email')
-    const password = document.querySelector('#password')
-    const display = document.querySelector('.error')
-   form.addEventListener('submit', async (e) => {
-      e.preventDefault()
-      display.textContent = ''
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          body: JSON.stringify({ email: email.value, password: password.value }),
-          headers: { 'Content-Type': 'application/json' }
-        })
-        const data = await res.json()
-        if (res.status === 400 || res.status === 401) {
-          return display.textContent = `${data.message}. ${data.error ? data.error : ''}`
-        }
-        
-        if(data.role === "admin"){
-          location.assign('/admin');
-        }
-        else{
-          location.assign('/')
-        }
-      } catch (err) {
-        console.log(err.message)
+
+<script>
+  d=document.getElementById("alert")
+
+  d.addEventListener('click', async (e) => {
+   
+    $('#alert').removeClass('show')
+    $('#alert').addClass('hide')
+  })
+
+  const form = document.querySelector('form')
+  const email = document.querySelector('#email')
+  const password = document.querySelector('#password')
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: email.value, password: password.value }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      const data = await res.json()
+      if (data.error!=undefined){
+      
+        document.getElementById("showalert").innerHTML = data.error
+        $('#alert').addClass('show')
+
       }
-    })
-  </script>
+
+      if (data.role === "admin") {
+        location.assign('/admin');
+      }
+
+    } catch (err) {
+      console.log(err.message)
+    }
+  })
+ 
+
+</script>

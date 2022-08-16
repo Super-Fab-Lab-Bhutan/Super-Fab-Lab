@@ -1,58 +1,223 @@
-<%- include('../partials/header.ejs')  %>
+<%- include('../partials/header.ejs') %>
+  <div class="container">
+   
+      <div style="display: flex;">
+        <h1 class="s">Users</h1>
+        <div id="searchWrapper"
+          style=" justify-content: flex-end;  position: absolute; right: 0;padding: 1rem 8rem 0px 0px">
+          Search <input type="text" name="searchBar" id="searchBar" />
+        </div>
+      </div>
+      <hr>
+      <a href="/viewusers/approval"> <button type="button" class="btn btn-warning">Users Waiting for
+          Approval</button></a><br><br>
 
-<body>
-    <div class="container-fluid">
+      <p>
 
-        
-        <a href="/viewusers/approval"> <button type="button" class="btn btn-warning">Users Waiting for Approval</button></a><br><br>
-      
-      
-    <table class="table .table-striped">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+        <label class="btn btn-secondary active" id="option1">
+          <span name="options" id="option1" value="all" aria-pressed="true" onclick="filter('all')"> All
+        </label>
+        <label class="btn btn-secondary " id="option2">
+          <span name="options" id="option2" value="Community" aria-pressed="true" onclick="filter('community')">
+            Community
+        </label>
+        <label class="btn btn-secondary " id="option3">
+          <span name="options" id="option3" value="Student" aria-pressed="true" onclick="filter('student')">
+            Student
+        </label>
+        <label class="btn btn-secondary" id="option4">
+          <span name="options" id="option4" value="StartUp" aria-pressed="true" onclick="filter('startup')"> Startup
+        </label>
+        <label class="btn btn-secondary" id="option5">
+          <span name="options" id="option5" value="Company" aria-pressed="true" onclick="filter('company')"> Company
+        </label>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="container">
+      <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Organization</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Type</th>
-            <th scope="col">Induction Training</th>
-            <th scope="col">Verified By Admin</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+
+            <th >Username</th>
+            <th >Email</th>
+            <th >Organization</th>
+            <th >Type</th>
+            <th >Verified By Admin</th>
+            <th >More info</th>
+            <th  colspan="2">Controls</th>
           </tr>
         </thead>
-        
-        <tbody>
-            <% users.forEach((user)=> { %>
-                <tr>
-                    <td><%=user.email %></td>
-                    <td><%=user.username %></td>
-                    <td><%=user.phoneNumber %></td>
-                    <td><%=user.organization %></span></td>
-                    <td><%=user.gender%></td>
-                    <td><%=user.role%></td>
-                    <td><%if(user.inductionTraning==true){%>
-                        Completed
-                        <%}else{%>
-                        Pending
-                        <%}%>
-                        </td>
-                    <td>
-                        <%if(user.isVerified==true){%>
-                            Verified
-                            <%}else{%>
-                            Waiting for Approval
-                            <%}%>
-                    </td>
-                    <td><a href="/viewusers/<%=user._id%>/edit"><button class="btn btn-success btn-small">Edit</button></a></td>
-                    <td><form class="deleteform d-inline-block " action="/viewusers/<%=user._id%>?_method=DELETE" method="POST"><button class="btn btn-danger btn-small" >Delete</button></form></td>
-                </tr>
-            </tr >
-            <% }) %>
-        </tbody>
-      </table>
-      </div>
+        <tbody id="charactersList">
 
-</body>
+    </div>
 
+    <script>
+
+      const charactersList = document.getElementById('charactersList');
+      const searchBar = document.getElementById('searchBar');
+
+
+
+
+      let hpCharacters = [];
+
+      const loadCharacters = async () => {
+        var req = await fetch('/admin/getusers')
+        hpCharacters = await req.json();
+        displayCharacters(hpCharacters);
+      };
+
+      searchBar.addEventListener('keyup', (e) => {
+        var filteredCharacters = []
+        const searchString = e.target.value.toLowerCase();
+
+        for (var i = 0; i < hpCharacters.length; i++) {
+
+          var name = hpCharacters[i].username.toLowerCase() + hpCharacters[i].organization.toLowerCase() + hpCharacters[i].email.toLowerCase();
+          if (name.includes(searchString)) {
+            filteredCharacters.push(hpCharacters[i])
+          }
+          displayCharacters(filteredCharacters);
+        }
+
+        $("#option2").removeClass("active");
+        $("#option3").removeClass("active");
+        $("#option4").removeClass("active");
+        $("#option5").removeClass("active");
+
+        $("#option1").addClass("active");
+      });
+
+
+
+      const filter = (p) => {
+        console.log("clicked on" + p)
+        $("#option1").removeClass("active");
+        $("#option2").removeClass("active");
+        $("#option3").removeClass("active");
+        $("#option4").removeClass("active");
+        $("#option5").removeClass("active");
+
+
+
+        if (p != "all") {
+          const result = hpCharacters.filter(word => word.role == p);
+          displayCharacters(result);
+        } else {
+          displayCharacters(hpCharacters);
+        }
+
+      };
+
+
+
+
+
+      const displayCharacters = (characters) => {
+        $('#more').click(function () {
+          console.log("clickwd")
+          $('#more_body').append("fd");
+        });
+        const htmlString = characters
+          .map((character) => {
+
+            return `
+            <tr>
+                <td>${character.username}</td>
+                <td>${character.email}</td>
+                <td>${character.organization}</td>
+                <td>${character.role}</td>
+                <td>${character.isVerified ? 'Verified <br>' : 'Waiting for Varification'}</td>
+                <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-secondary" id="more" data-toggle="modal" data-target="#Details-${character._id}">
+                  More Info
+                </button>
+                <!-- Modal -->
+           <div class="modal fade" id="Details-${character._id}" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                <center>
+                 <h5 class="modal-title" id="exampleModalLongTitle">${character.username}</h5></center>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body" id="more_body">
+                <center>  
+                  <i> Email:</i>
+                  <h5>${character.email}</h5><br/>
+                  <i> Phone Number:</i>
+                  <h5>${character.phoneNumber}</h5><br/>
+                  <i>Organization:</i>
+                  <h5> ${character.organization}</h5><br/>
+                  <i>Gender: </i>
+                  <h5>${character.gender}</h5><br/>
+                  <i>Account Type:</i>
+                  <h5> ${character.role}</h5><br/>
+                  <i>Induction Training:</i>
+                  <h5>${character.inductionTraning ? 'Completed <br>' : 'Not Completed'}</h5><br/>
+                  
+                  <i>Verification:</i>
+                  <h5>  ${character.isVerified? 'Verified':'Not Verified'}</h5><br/>
+                </center>
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               </div>
+             </div>
+           </div>
+         </div>
+               
+              </td>
+                <td>
+                <a href="/viewusers/${character._id}/edit" class="btn btn-info btn-small">Edit</a>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger btn-small" data-toggle="modal"
+                  data-target="#exampleModalCenter${character._id}">
+                  Remove
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter${character._id}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Account Deletion of <b>${character.username}</b></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to remove account of ${character.username}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form class="d-inline-block" action="/viewusers/${character._id}?_method=DELETE" method="POST">
+                          <button class="btn btn-danger btn-small">Remove</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+             
+            </tr>
+        `;
+          })
+          .join('');
+        charactersList.innerHTML = htmlString;
+      };
+
+      loadCharacters();
+
+
+    </script>

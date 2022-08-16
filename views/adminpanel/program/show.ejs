@@ -3,7 +3,8 @@
 
 <div class="container">
   <h1>Programs</h1>
-  <a href="/admin/program/new" class="btn btn-info btn-small">Add new</a>
+  <hr>
+  <a href="/admin/program/new" class="btn btn-info btn-small">Add a Program </a>
   <p></p>
 
   <p>
@@ -36,7 +37,7 @@
         <div class="card-body">
           <h5 class="card-title"><%=i.title%></h5>
 
-          <p class="card-text"><%=i.description%></p>
+          <p class="card-text"><%-i.description%></p>
           <br />
           <a href="/admin/program/<%= i._id %>/edit" class="btn btn-info btn-small">Edit</a>
 

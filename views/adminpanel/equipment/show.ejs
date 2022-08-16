@@ -1,93 +1,207 @@
 <%- include('../partials/header.ejs') %>
-<div class="container">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <h1>Equipment</h1>
-  <a href="/admin/equipment/new" class="btn btn-info btn-small">Add new</a>
-  <p>
   <div class="container">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a id="a" class="nav-link active" href="/admin/equipment">All</a>
-      </li>
-      <li class="nav-item">
-        <a id="c" class="nav-link" href="/admin/equipment/carpentry">Carpentry</a>
-      </li>
-      <li class="nav-item">
-        <a id="e" class="nav-link" href="/admin/equipment/electronic">Electronic</a>
-      </li>
-      <li class="nav-item">
-        <a id="h" class="nav-link" href="/admin/equipment/heavy">Heavy</a>
 
-      <li class="nav-item">
-        <a id="m" class="nav-link" href="/admin/equipment/metal">Metal</a>
-
-      </li>
-    </ul>
-  </div>
-
-  <div class="row">
-
-    <% for(let i of equipment){ %>
-    <div class="col-lg-4 col-md-6 mb-3">
-      <div class="card mx-auto" style="width: 20rem;">
-        <img src="<%=i.image%>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Ep Name: <%=i.equipmentName%>
-          </h5>
-          <h6>Type: <%=i.type%>
-            <h6>
-              <span class="card-text">Description: <%=i.description%><br>
-                Booking available for<b> <br>
-                  <%if(i.student==true){%>Student<br>
-                  <%}%>
-                              <%if(i.company==true){%>Company<br>
-                  <%}%>
-                                  <%if(i.community==true){%>Community<br>
-                  <%}%>
-                                      <%if(i.startup==true){%>Startup<br>
-                  <%}%>
-                        </b>
-                        Available <%=i.isAvailable%>
-              </span>
-              <br>
-              <a href="/admin/equipment/<%= i._id %>/edit" class="btn btn-info btn-small">Edit</a>
-
-              <form class="d-inline-block" action="/admin/equipment/<%= i.id %>?_method=DELETE" method="POST">
-                <button class="btn btn-danger btn-small">Delete</button>
-              </form>
-
+      <div style="display: flex;">
+        <h1>Equipment</h1>
+        <div id="searchWrapper"
+          style=" justify-content: flex-end;  position: absolute; right: 0;padding: 1rem 8rem 0px 0px">
+          Search <input type="text" name="searchBar" id="searchBar" />
         </div>
       </div>
+      <hr>
+      <a href="/admin/equipment/new" class="btn btn-info btn-small">Add an Equipment
+      </a>
+      <p>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+        <label class="btn btn-secondary active" id="option1">
+          <span name="options" id="option1" value="all" aria-pressed="true" onclick="filter('all')"> All
+        </label>
+        <label class="btn btn-secondary " id="option2">
+          <span name="options" id="option2" value="Carpentry" aria-pressed="true" onclick="filter('Carpentry')">
+            Carpentry
+        </label>
+        <label class="btn btn-secondary " id="option3">
+          <span name="options" id="option3" value="Electronic" aria-pressed="true" onclick="filter('Electronic')">
+            Electronic
+        </label>
+        <label class="btn btn-secondary" id="option4">
+          <span name="options" id="option4" value="Heavy" aria-pressed="true" onclick="filter('Heavy')"> Heavy
+        </label>
+        <label class="btn btn-secondary" id="option5">
+          <span name="options" id="option5" value="Metal" aria-pressed="true" onclick="filter('Metal')"> Laser
+        </label>
+
+      </div>
     </div>
-    <%}%>
-          <%if(all){%>
+
+    <br>
+    <div class="container ov-h">
+      <table class=" table table-bordered">
+        <thead>
+          <tr>
+            <th data-column="Name" data-order="desc">Equipment</th>
+            <th data-column="Type" data-order="desc">Type</th>
+            <th>Bookings Available for</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Removal</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="charactersList">
+    </div>
+
     <script>
-      $(".nav-link").removeClass("active");
-      $("#a").addClass("active");
-    </script>
-    <%}else if(equipment[0].type=="Electronic" ){%>
-    <script>
-      $(".nav-link").removeClass("active");
-      $("#e").addClass("active");
-    </script>
-    <%}else if(equipment[0].type=="Heavy" ){%>
-    <script>
-      $(".nav-link").removeClass("active");
-      $("#h").addClass("active");
-    </script>
-    <%}else if(equipment[0].type=="Metal" ){%>
-    <script>
-      $(".nav-link").removeClass("active");
-      $("#m").addClass("active");
-    </script>
-    <%}else if(equipment[0].type=="Carpentry" ){%>
-    <script>
-      $(".nav-link").removeClass("active");
-      $("#c").addClass("active");
-    </script>
-    <%}%>
+
+      const charactersList = document.getElementById('charactersList');
+      const searchBar = document.getElementById('searchBar');
 
 
-    </div>
-  </div>
+
+
+      let hpCharacters = [];
+
+      const loadCharacters = async () => {
+        var req = await fetch('/admin/equipments')
+        hpCharacters = await req.json();
+        displayCharacters(hpCharacters);
+      };
+
+      searchBar.addEventListener('keyup', (e) => {
+        var filteredCharacters = []
+        const searchString = e.target.value.toLowerCase();
+
+        for (var i = 0; i < hpCharacters.length; i++) {
+
+          var name = hpCharacters[i].equipmentName.toLowerCase() + hpCharacters[i].type.toLowerCase();
+          if (name.includes(searchString)) {
+            filteredCharacters.push(hpCharacters[i])
+          }
+          displayCharacters(filteredCharacters);
+        }
+
+        $("#option2").removeClass("active");
+        $("#option3").removeClass("active");
+        $("#option4").removeClass("active");
+        $("#option5").removeClass("active");
+
+        $("#option1").addClass("active");
+      });
+
+
+
+      const filter = (p) => {
+        console.log("clicked on" + p)
+        $("#option1").removeClass("active");
+        $("#option2").removeClass("active");
+        $("#option3").removeClass("active");
+        $("#option4").removeClass("active");
+        $("#option5").removeClass("active");
+
+
+
+        if (p != "all") {
+          const result = hpCharacters.filter(word => word.type == p);
+          displayCharacters(result);
+        } else {
+          displayCharacters(hpCharacters);
+        }
+
+        console.log(result)
+      };
+
+
+
+
+      const displayCharacters = (characters) => {
+        const htmlString = characters
+          .map((character) => {
+            return `
+            <tr><center>
+                <td>${character.equipmentName}</td>
+                <td>${character.type}</td>
+                <td>
+                  ${character.student ? 'Student <br>' : ''}
+                  ${character.company ? 'Company <br>' : ''}
+                  ${character.community ? 'Community <br>' : ''}
+                  ${character.startup ? 'Startup <br>' : ''}
+                </td>
+                <td>  ${character.isAvailable ? 'Available' : 'Not Available'}</td>
+                <td>
+                <a href="/admin/equipment/${character._id}/edit" class="btn btn-info btn-small">Edit</a>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger btn-small" data-toggle="modal"
+                  data-target="#exampleModalCenter${character._id}">
+                  Remove
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter${character._id}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to remove this Equipment?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form class="d-inline-block" action="/admin/equipment/${character._id}?_method=DELETE" method="POST">
+                          <button class="btn btn-danger btn-small">Remove</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Details${character._id}">
+                  More Info
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="Details${character._id}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">${character.equipmentName}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <center>
+                          <img src=${character.image}>
+                        </center>
+                        <br/>
+                        <div class="text-left">
+                          ${character.description}
+                        </div>     
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+        `;
+          })
+          .join('');
+        charactersList.innerHTML = htmlString;
+      };
+
+      loadCharacters();
+
+
+    </script>

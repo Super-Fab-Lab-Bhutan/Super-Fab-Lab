@@ -1,59 +1,122 @@
-<%- include('partials/header.ejs')  %>
+<%- include('partials/header.ejs') %>
+    <style>
+        .icon-box i {
+            margin: 25px;
+        }
 
-                <!-- End of Topbar -->
-                <div class="container-fluid">
+        .i-large-box {
+            width: 100px;
+            height: 100px;
+            line-height: 98px;
+            text-align: center;
+            font-size: 40px
+        }
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Profile</h1>
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        .i-medium-box {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .i-small-box {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 22px
+        }
+
+        .i-extra-small-box {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 15px
+        }
+
+        .i-plain {
+            color: #737373;
+            background-color: transparent !important;
+        }
+
+
+
+        .i-rounded {
+            border-radius: 3px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .container {
+
+            margin-top: 200px;
+        }
+
+        .t-plain {
+            color: #737373;
+            background-color: transparent !important;
+        }
+
+        .i-plain:hover {
+            color: #fff;
+            background-color: rgb(47, 49, 49) !important;
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+        .t-plain:hover {
+
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+    </style>
+    <!-- End of Topbar -->
+
+        <section class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md col-sm-10 center-col text-center icon-box">
+                        <a href="/admin/users"><i class="i-large-box i-plain fa fa-users"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Users</span></i></a>
+                        <a href="/admin/equipment"><i class="i-large-box i-plain fa fa-cogs"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Equipment</span></i></a>
+                        <a href="/admin/news-and-events"><i class="i-large-box i-plain fa fa-newspaper-o"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">News/Events</span></i></a>
+                        <a href="/admin/program"><i class="i-large-box i-plain fa fa-tasks"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Program</span></i></a>
+                        <a href="/admin/team"><i class="i-large-box i-plain fa fa-users"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Team</span></i></a>
+                        <a href="/admin/gallery"><i class="i-large-box i-plain fa fa-image"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Gallery</span></i></a>
+                        <a href="/admin/fileupload"><i class="i-large-box i-plain fa fa-upload"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">File</span></i></a>
+                        <a href="/admin/booking"><i class="i-large-box i-plain fa fa-table"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Booking</span></i></a>
+                        <a href="/viewBookingInduction"><i class="i-large-box i-plain fa fa-th"><br><span class="i-large-box t-plain"
+                                style="font-size: 20px;">Induction</span></i></a>
+
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-12">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            
-                                            <div class="h5 mb-12 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                      
-                    </div>
+                </div>
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Super FabLab 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
+        </section>
 
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    
 
-  
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="assets/admin_assets/vendor/jquery/jquery.min.js"></script>
@@ -64,6 +127,6 @@
 
 
 
-</body>
+    </body>
 
-</html>
+    </html>

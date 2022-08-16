@@ -28,6 +28,7 @@ app.use(cookieParser()); //a middleware which parses cookies attached to the cli
 app.use(express.json()); //returns middleware that only parses json but with buit in express.
 app.use(express.urlencoded({ extended: true })); //TO GET FORM DATA
 app.use(express.static(path.join(__dirname, "static")));
+app.use(express.static(__dirname + '/public'));
 app.use(express.static("./public"));
 //app.use("/uploads/images", express.static(path.join("uploads", "images"))); //Multer directory for images to make it public
 //app.use("/uploads/files", express.static(path.join("uploads", "files"))); //Multer directory for files to make it public

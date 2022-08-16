@@ -6,53 +6,21 @@ const Equipment = require("../model/equipment");
 exports.getEquipment = async (req, res, next) => {
   try {
     const equipment = await Equipment.find({});
-    res.render("./adminpanel/equipment/show", { equipment, all: true });
+    res.render("./adminpanel/equipment/show", { equipment });
   } catch (e) {
     console.log(e);
   }
 };
 
-exports.getAdminCarpentry = async (req, res, next) => {
+exports.getAdminEquipments = async (req, res, next) => {
   try {
-    const equipment = await Equipment.find({ type: "Carpentry" });
-    res.render("./adminpanel/equipment/show", { equipment, all: false });
+    const equipment = await Equipment.find({});
+    res.json(equipment) 
   } catch (e) {
     console.log(e);
   }
 };
 
-exports.getAdminElectronic = async (req, res, next) => {
-  try {
-    const equipment = await Equipment.find({
-      type: "Electronic",
-    });
-    res.render("./adminpanel/equipment/show", { equipment, all: false });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-exports.getAdminMetal = async (req, res) => {
-  try {
-    const equipment = await Equipment.find({
-      type: "Metal",
-    });
-    res.render("./adminpanel/equipment/show", { equipment, all: false });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-exports.getAdminHeavy = async (req, res) => {
-  try {
-    const equipment = await Equipment.find({
-      type: "Heavy",
-    });
-    res.render("./adminpanel/equipment/show", { equipment, all: false });
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 exports.postEquipment = async (req, res) => {
   var image = null;
@@ -111,6 +79,7 @@ exports.patchEquipment = async (req, res) => {
 
 exports.equipmentDelete = async (req, res) => {
   try {
+    
     const { id } = req.params;
     const img_path = await Equipment.findById(id);
 
@@ -120,6 +89,7 @@ exports.equipmentDelete = async (req, res) => {
           await Equipment.findByIdAndDelete(id);
         }
       });
+      await Equipment.findByIdAndDelete(id);
     } else {
       await Equipment.findByIdAndDelete(id);
     }

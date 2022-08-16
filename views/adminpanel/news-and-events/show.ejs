@@ -3,7 +3,8 @@
     <div class="container">
 
         <h1>News and Events</h1>
-        <a href="/admin/news-and-events/new" class="btn btn-info btn-small">Add new</a>
+        <hr>
+        <a href="/admin/news-and-events/new" class="btn btn-info btn-small">Add News/Events</a>
         <p>
         <div class="row">
             <% for(let i of news){ %>
@@ -15,7 +16,7 @@
                             </h5>
                 
 
-                                        <span class="card-text">Description: <%=i.description%><br>
+                                        <span class="card-text"><%-i.description%><br>
 
                                                 </b>
                                         </span>
@@ -33,3 +34,4 @@
                 <%}%>
         </div>
     </div>
+
