@@ -45,7 +45,10 @@ exports.patchApprove = async (req, res) => {
   const user = await User.findByIdAndUpdate(id, { isVerified: true });
 
   const message =
-    "<p><b> Your Registration for SFL Registration is approved, Now you can log in for booking</b> </p>";
+    `<p><b> Your Registration for SFL Registration is approved</b></p>
+    Before Booking Equipments, You have to Enroll For Induction booking.<br>
+    To Enroll for Induction Booking head over to booking tab and there will be a button to enroll for the training
+    `;
   const subject = "Registration approved!!";
   SendEmailHtml(user.email, message, subject);
   res.redirect("/admin/users");
