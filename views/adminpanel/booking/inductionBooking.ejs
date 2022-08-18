@@ -5,14 +5,12 @@
             <h1><b>Induction Bookings</b></h1>
             <h3>Select the date to check bookings for</h3>
             <form>
-                <input type="date" id="datepicker">
-                &nbsp
-                <input type="submit" value="Check" style="font-size: 1rem">
+                <input type="date" id="datepicker" >
             </form>
             </br>
 
             <span class="show-search">
-                Search <input id="search-input" type="text">
+                Search <input id="search-input" type="text" >
                 </p>
             </span>
         </div>
@@ -28,9 +26,7 @@
             </span>
             <tbody id="myTable">
                 <tr>
-                    <td colspan="4" style='text-align:center; vertical-align:middle'>
-                        <h1><b>Select Date</b></h1>
-                    </td>
+
                 </tr>
             </tbody>
         </table>
@@ -39,6 +35,39 @@
     </p>
     <script>
         var dataArray = [];
+
+        const today = async () => {
+            const today = new Date().toJSON().substring(0, 10)
+            const day =new Date(today).getUTCDay()
+            if (![6, 0, 1, 2, 3].includes(day)) {
+                try {
+                    const res = await fetch('/BookingInduction', {
+                        method: 'POST',
+                        body: JSON.stringify({ today }),
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    dataArray = await res.json();
+
+                    console.log(dataArray)
+                    document.querySelector('#datepicker').value = today;
+
+                    buildTable(dataArray)
+                } catch (err) {
+                    console.log(err.message)
+                }
+            } else {
+                var table = document.getElementById('myTable')
+                table.innerHTML = ''
+                var row = `<tr>
+                    <td colspan="3" style='text-align:center; vertical-align:middle'>
+                        Induction Bookings are only available on Thursdays and Firdays
+                    </td
+                    </tr>`
+                table.innerHTML += row
+                document.querySelector('#datepicker').value = today;
+            }
+        }
+        today()
 
         $('#search-input').on('keyup', function () {
             var value = $(this).val()
@@ -68,7 +97,7 @@
         })
 
         const form = document.querySelector('form');
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener('change', async (e) => {
             e.preventDefault()
             date = document.querySelector('#datepicker').value;
             var day = new Date(date).getUTCDay();
@@ -80,6 +109,7 @@
                         headers: { 'Content-Type': 'application/json' }
                     })
                     dataArray = await res.json();
+                    console.log(dataArray)
                     buildTable(dataArray)
                 } catch (err) {
                     console.log(err.message)
@@ -101,7 +131,6 @@
                             })
                             dataArray = await res.json();
                             alert(dataArray)
-                            //if(!alert(dataArray)){window.location.reload();}
                         } catch (err) {
                             console.log(err.message)
                         }
@@ -110,19 +139,29 @@
                 });
             } else {
                 alert('Input type date is empty or Invalid Date\nOnly Thursday and Friday Available');
+                var table = document.getElementById('myTable')
+                table.innerHTML = ''
+                var row = `<tr>
+                    <td colspan="3" style='text-align:center; vertical-align:middle'>
+                        Induction Bookings are only available on Thursdays and Firdays
+                    </td
+                    </tr>`
+                table.innerHTML += row
             }
         })
 
 
         function buildTable(data) {
+
             var table = document.getElementById('myTable')
             table.innerHTML = ''
             if (!data.length) {
                 var row = `<tr >
-							    <td colspan="4" style='text-align:center; vertical-align:middle'>No Matches Found</td>
+							    <td colspan="4" style='text-align:center; vertical-align:middle'>No Induction Bookings found on this day</td>
                   </tr>`
                 table.innerHTML += row
             }
+            
             for (var i = 0; i < data.length; i++) {
                 var row =
                     `<tr>
