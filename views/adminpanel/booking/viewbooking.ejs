@@ -1,17 +1,11 @@
 <%- include('../partials/header.ejs') %>
-  <script>
-
-
-
-  </script>
   <div class="container-fluid">
     <div class="container">
       <h1><b>Equipment Bookings</b></h1>
       <h3>Select the date to check bookings for</h3>
       <form>
-        <input type="date" id="datepicker">
-        &nbsp
-        <input type="submit" value="Check" style="font-size: 1rem">
+        <input type="date" id="datepicker" >
+
       </form>
       </br>
 
@@ -34,9 +28,7 @@
       </span>
       <tbody id="myTable">
         <tr>
-          <td colspan="4" style='text-align:center; vertical-align:middle'>
-            <h1><b>Select Date</b></h1>
-          </td>
+
         </tr>
       </tbody>
     </table>
@@ -44,12 +36,29 @@
   </div>
   </p>
   <script>
-
-
-
-
+    var date;
     var dataArray = [];
 
+    const today = async () => {
+      const d = new Date().toJSON().substring(0, 10)
+      try {
+        const res = await fetch('/admin/booking', {
+          method: 'POST',
+          body: JSON.stringify({ d }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        dataArray = await res.json();
+        
+        var today = new Date().toISOString().split('T')[0];
+      
+        document.querySelector('#datepicker').value = today;
+        
+        buildTable(dataArray)
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
+    today()
     $('#search-input').on('keyup', function () {
       var value = $(this).val()
       var data = searchTable(value, dataArray)
@@ -78,7 +87,7 @@
     })
 
     const form = document.querySelector('form');
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('change', async (e) => {
       e.preventDefault()
       date = document.querySelector('#datepicker').value;
       if (date) {
@@ -89,7 +98,7 @@
             headers: { 'Content-Type': 'application/json' }
           })
           dataArray = await res.json();
-          console.log(dataArray)
+
           buildTable(dataArray)
         } catch (err) {
           console.log(err.message)
@@ -127,9 +136,10 @@
     function buildTable(data) {
       var table = document.getElementById('myTable')
       table.innerHTML = ''
+
       if (!data.length) {
-        var row = `<tr >
-							    <td colspan="4" style='text-align:center; vertical-align:middle'>No Matches Found</td>
+        var row = `<tr>
+							    <td colspan="5" style='text-align:center; vertical-align:middle'>No Bookings on this date </td>
                   </tr>`
         table.innerHTML += row
       }
