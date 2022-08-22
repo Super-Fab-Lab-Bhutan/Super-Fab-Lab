@@ -32,14 +32,14 @@ exports.getElectronic = async (req, res, next) => {
   }
 };
 
-exports.getMetal = async (req, res, next) => {
+exports.getLaser = async (req, res, next) => {
   try {
     const equipment = await Equipment.find({
-      type: "Metal",
+      type: "Laser",
       isAvailable: true,
     });
     if (!equipment) {
-      res.json({ message: "No Eqipument" });
+      res.json({ message: "No Equipment" });
     } else {
       res.json({ equipment });
     }

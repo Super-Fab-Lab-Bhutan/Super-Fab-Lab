@@ -8,7 +8,7 @@ const {
   getCarpentry,
   getElectronic,
   getHeavy,
-  getMetal,
+  getLaser,
 } = require("../controller/equipments");
 
 const {
@@ -30,7 +30,7 @@ router.get("/machines/electronic", getElectronic);
 
 router.get("/machines/heavy-machinary", getHeavy);
 
-router.get("/machines/metal-works", getMetal);
+router.get("/machines/laser", getLaser);
 
 /** Admin Side API **/
 router.get("/admin/equipment", adminAuth, getEquipment);
