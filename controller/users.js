@@ -960,7 +960,7 @@ const sendResetEmail = (id, email, res) => {
 </body>
 
 </html>`;
-              const subject = "Passsword Reset Link";
+              const subject = "Passsword Reset";
               SendEmailHtml(email, message, subject);
               return res.json({
                 message: "Email sent",
