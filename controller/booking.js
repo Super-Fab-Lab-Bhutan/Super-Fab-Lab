@@ -341,7 +341,7 @@ exports.equipmentBooking = async (req, res) => {
 																	style="width:100%;padding-right:0px;padding-left:0px;">
 																	<div align="center" class="alignment"
 																		style="line-height:10px"><a
-																			href="www.example.com" style="outline:none"
+																			href="https://jnwbhutansuperfablab.bt" style="outline:none"
 																			tabindex="-1" target="_blank"><img
 																				
 																				src="https://superfablabbhutan.bt/images/favicon.png"
@@ -817,7 +817,7 @@ exports.equipmentBooking = async (req, res) => {
 																	style="width:100%;padding-right:0px;padding-left:0px;">
 																	<div align="center" class="alignment"
 																		style="line-height:10px"><a
-																			href="www.example.com" style="outline:none"
+																			href="https://jnwbhutansuperfablab.bt/" style="outline:none"
 																			tabindex="-1" target="_blank"><img
 	
 																				src="https://superfablabbhutan.bt/images/favicon.png"
