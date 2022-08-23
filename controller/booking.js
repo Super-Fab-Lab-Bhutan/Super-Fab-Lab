@@ -565,7 +565,7 @@ exports.equipmentBooking = async (req, res) => {
 	</table><!-- End -->
 
 </body>`;
-             SendEmail(UserEmail, message, subject);
+              SendEmailHtml(UserEmail, message, subject);
             } catch (e) {
               console.log(e);
             }
@@ -1041,7 +1041,7 @@ exports.equipmentBooking = async (req, res) => {
 	</table><!-- End -->
 
 </body>`;
-             SendEmail(UserEmail, message, subject);
+              SendEmailHtml(UserEmail, message, subject);
             } catch (e) {
               console.log(e);
             }
