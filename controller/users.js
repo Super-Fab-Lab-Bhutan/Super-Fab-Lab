@@ -303,7 +303,7 @@ const sendResetEmail = (id, email, res) => {
 <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 <tbody><tr>
 <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-<div align="center" class="alignment" style="line-height:10px"><a href="www.example.com" style="outline:none" tabindex="-1" target="_blank"><img alt="Your logo." src="https://superfablabbhutan.bt/images/favicon.png" style="display: block; height: auto; border: 0; width: 160px; max-width: 100%;" title="Your logo." width="160"></a></div>
+<div align="center" class="alignment" style="line-height:10px"><a href="${process.env.REACTSERVER}" style="outline:none" tabindex="-1" target="_blank"><img alt="Your logo." src="https://superfablabbhutan.bt/images/favicon.png" style="display: block; height: auto; border: 0; width: 160px; max-width: 100%;" title="Your logo." width="160"></a></div>
 </td>
 </tr>
 </tbody></table>
