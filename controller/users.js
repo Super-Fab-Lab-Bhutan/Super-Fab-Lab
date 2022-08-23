@@ -202,10 +202,10 @@ exports.patchApprove = async (req, res) => {
 																		style="line-height:10px"><a
 																			href="https://jnwbhutansuperfablab.bt/"
 																			style="outline:none" tabindex="-1"
-																			target="_blank"><img alt="Your logo."
+																			target="_blank"><img 
 																				src="https://superfablabbhutan.bt/images/favicon.png"
 																				style="display: block; height: auto; border: 0; width: 160px; max-width: 100%;"
-																				title="Your logo." width="160"></a>
+																				 width="160"></a>
 																	</div>
 																</td>
 															</tr>
