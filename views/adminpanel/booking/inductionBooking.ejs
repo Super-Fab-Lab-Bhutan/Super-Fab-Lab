@@ -5,12 +5,12 @@
             <h1><b>Induction Bookings</b></h1>
             <h3>Select the date to check bookings for</h3>
             <form>
-                <input type="date" id="datepicker" >
+                <input type="date" id="datepicker">
             </form>
             </br>
 
             <span class="show-search">
-                Search <input id="search-input" type="text" >
+                Search <input id="search-input" type="text">
                 </p>
             </span>
         </div>
@@ -26,30 +26,28 @@
             </span>
             <tbody id="myTable">
                 <tr>
-
                 </tr>
             </tbody>
         </table>
-
     </div>
     </p>
     <script>
         var dataArray = [];
 
         const today = async () => {
-            const today = new Date().toJSON().substring(0, 10)
-            const day =new Date(today).getUTCDay()
+            const date = new Date().toJSON().substring(0, 10)
+            const day = new Date(today).getUTCDay()
             if (![6, 0, 1, 2, 3].includes(day)) {
                 try {
                     const res = await fetch('/BookingInduction', {
                         method: 'POST',
-                        body: JSON.stringify({ today }),
+                        body: JSON.stringify({ date }),
                         headers: { 'Content-Type': 'application/json' }
                     })
                     dataArray = await res.json();
 
                     console.log(dataArray)
-                    document.querySelector('#datepicker').value = today;
+                    document.querySelector('#datepicker').value = date;
 
                     buildTable(dataArray)
                 } catch (err) {
@@ -85,17 +83,14 @@
                 $(this).data('order', "asc")
                 dataArray = dataArray.sort((a, b) => a[column] > b[column] ? 1 : -1)
                 text += '&#9660'
-
             } else {
                 $(this).data('order', "desc")
                 dataArray = dataArray.sort((a, b) => a[column] < b[column] ? 1 : -1)
                 text += '&#9650'
-
             }
             $(this).html(text)
             buildTable(dataArray)
         })
-
         const form = document.querySelector('form');
         form.addEventListener('change', async (e) => {
             e.preventDefault()
@@ -161,7 +156,7 @@
                   </tr>`
                 table.innerHTML += row
             }
-            
+
             for (var i = 0; i < data.length; i++) {
                 var row =
                     `<tr>

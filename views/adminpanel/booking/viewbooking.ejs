@@ -40,18 +40,18 @@
     var dataArray = [];
 
     const today = async () => {
-      const d = new Date().toJSON().substring(0, 10)
+      const date = new Date().toJSON().substring(0, 10)
+      
       try {
         const res = await fetch('/admin/booking', {
           method: 'POST',
-          body: JSON.stringify({ d }),
+          body: JSON.stringify({ date }),
           headers: { 'Content-Type': 'application/json' }
         })
         dataArray = await res.json();
-        
-        var today = new Date().toISOString().split('T')[0];
+        console.log(dataArray)
       
-        document.querySelector('#datepicker').value = today;
+        document.querySelector('#datepicker').value = date;
         
         buildTable(dataArray)
       } catch (err) {
