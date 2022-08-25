@@ -32,37 +32,22 @@
     </div>
     </p>
     <script>
+
         var dataArray = [];
 
         const today = async () => {
             const date = new Date().toJSON().substring(0, 10)
-            const day = new Date(today).getUTCDay()
-            if (![6, 0, 1, 2, 3].includes(day)) {
-                try {
-                    const res = await fetch('/BookingInduction', {
-                        method: 'POST',
-                        body: JSON.stringify({ date }),
-                        headers: { 'Content-Type': 'application/json' }
-                    })
-                    dataArray = await res.json();
-
-                    console.log(dataArray)
-                    document.querySelector('#datepicker').value = date;
-
-                    buildTable(dataArray)
-                } catch (err) {
-                    console.log(err.message)
-                }
-            } else {
-                var table = document.getElementById('myTable')
-                table.innerHTML = ''
-                var row = `<tr>
-                    <td colspan="3" style='text-align:center; vertical-align:middle'>
-                        Induction Bookings are only available on Thursdays and Firdays
-                    </td
-                    </tr>`
-                table.innerHTML += row
-                document.querySelector('#datepicker').value = today;
+            try {
+                const res = await fetch('/BookingInduction', {
+                    method: 'POST',
+                    body: JSON.stringify({ date }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                dataArray = await res.json();
+                document.querySelector('#datepicker').value = date;
+                buildTable(dataArray)
+            } catch (err) {
+                console.log(err.message)
             }
         }
         today()
@@ -91,88 +76,77 @@
             $(this).html(text)
             buildTable(dataArray)
         })
+
         const form = document.querySelector('form');
         form.addEventListener('change', async (e) => {
             e.preventDefault()
             date = document.querySelector('#datepicker').value;
             var day = new Date(date).getUTCDay();
-            if (![6, 0, 1, 2, 3].includes(day)) {
-                try {
-                    const res = await fetch('/BookingInduction', {
-                        method: 'POST',
-                        body: JSON.stringify({ date }),
-                        headers: { 'Content-Type': 'application/json' }
-                    })
-                    dataArray = await res.json();
-                    console.log(dataArray)
-                    buildTable(dataArray)
-                } catch (err) {
-                    console.log(err.message)
-                }
-                const s = document.querySelector("*[name='delete']");
-                s.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    var message = prompt("Please enter the reason for cancellation");
-                    var id = $("*[name='delete']").attr('id')
-                    if (message == null || message == "") {
-
-                        return
-                    } else {
-                        try {
-                            const res = await fetch('/cancel/InductionBooking', {
-                                method: 'POST',
-                                body: JSON.stringify({ id, message }),
-                                headers: { 'Content-Type': 'application/json' }
-                            })
-                            dataArray = await res.json();
-                            alert(dataArray)
-                        } catch (err) {
-                            console.log(err.message)
-                        }
-                    }
-
-                });
-            } else {
-                alert('Input type date is empty or Invalid Date\nOnly Thursday and Friday Available');
-                var table = document.getElementById('myTable')
-                table.innerHTML = ''
-                var row = `<tr>
-                    <td colspan="3" style='text-align:center; vertical-align:middle'>
-                        Induction Bookings are only available on Thursdays and Firdays
-                    </td
-                    </tr>`
-                table.innerHTML += row
+            try {
+                const res = await fetch('/BookingInduction', {
+                    method: 'POST',
+                    body: JSON.stringify({ date }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                dataArray = await res.json();
+                buildTable(dataArray)
+            } catch (err) {
+                console.log(err.message)
             }
         })
 
+        const deleteBooking = async (id) => {
+            var message = prompt("Please enter the reason for cancellation");
+            if (message == null || message == "") {
+                return
+            } else {
+                console.log(id)
+                try {
+                    const res = await fetch('/cancel/InductionBooking', {
+                        method: 'POST',
+                        body: JSON.stringify({ id, message }),
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    s = await res.json();
+                    alert(s)
+                    
+                } catch (err) {
+                    console.log(err.message)
+                }
+            }
+        }
 
         function buildTable(data) {
 
             var table = document.getElementById('myTable')
             table.innerHTML = ''
             if (!data.length) {
-                var row = `<tr >
-							    <td colspan="4" style='text-align:center; vertical-align:middle'>No Induction Bookings found on this day</td>
-                  </tr>`
+                var row =   `<tr >
+							    <td colspan="4" style='text-align:center; vertical-align:middle'>
+                                    No Induction Bookings found on this day
+                                </td>
+                            </tr>`
                 table.innerHTML += row
             }
 
             for (var i = 0; i < data.length; i++) {
-                var row =
-                    `<tr>
-							<td>
-                  Name: ${data[i].UserName}</br>
-                  Email: ${data[i].UserEmail}</br>
-                  Org: ${data[i].UserOrganization}</br>
-                  Phone: ${data[i].UserPhone}</br>
-                  Booked on: ${data[i].createdAt}
-              </td>
-              <td>${data[i].time}</td>
-              <td>
-              <form><button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}">Cancel</button></form>
-              </td>
-					  </tr>
-                    `
+                var row =   `<tr>
+						        <td>
+                                    Name: ${data[i].UserName}</br>
+                                    Email: ${data[i].UserEmail}</br>
+                                    Org: ${data[i].UserOrganization}</br>
+                                    Phone: ${data[i].UserPhone}</br>
+                                    Booked on: ${data[i].createdAt}
+                                </td>
+                                <td>${data[i].time}</td>
+                                <td>
+                                    <form>
+                                    <button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}" onclick="deleteBooking('${data[i]._id}')">
+                                        Cancel
+                                    </button>
+                                    </form>
+                                </td>
+					        </tr>`
                 table.innerHTML += row
             }
         }
@@ -188,6 +162,9 @@
             }
             return filterdata
         }
-    </script>
 
+    </script>
+    <script>
+
+    </script>
     </div>

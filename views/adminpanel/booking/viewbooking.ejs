@@ -1,10 +1,10 @@
 <%- include('../partials/header.ejs') %>
   <div class="container-fluid">
     <div class="container">
-      <h1><b>Equipment Bookings</b></h1>
+      <h1 onclick="deletebooking()"><b>Equipment Bookings</b></h1>
       <h3>Select the date to check bookings for</h3>
       <form>
-        <input type="date" id="datepicker" >
+        <input type="date" id="datepicker">
 
       </form>
       </br>
@@ -28,11 +28,9 @@
       </span>
       <tbody id="myTable">
         <tr>
-
         </tr>
       </tbody>
     </table>
-
   </div>
   </p>
   <script>
@@ -41,7 +39,6 @@
 
     const today = async () => {
       const date = new Date().toJSON().substring(0, 10)
-      
       try {
         const res = await fetch('/admin/booking', {
           method: 'POST',
@@ -49,16 +46,14 @@
           headers: { 'Content-Type': 'application/json' }
         })
         dataArray = await res.json();
-        console.log(dataArray)
-      
         document.querySelector('#datepicker').value = date;
-        
         buildTable(dataArray)
       } catch (err) {
         console.log(err.message)
       }
     }
     today()
+
     $('#search-input').on('keyup', function () {
       var value = $(this).val()
       var data = searchTable(value, dataArray)
@@ -70,17 +65,14 @@
       var order = $(this).data('order')
       var text = $(this).html()
       text = text.substring(0, text.length - 1)
-
       if (order == 'desc') {
         $(this).data('order', "asc")
         dataArray = dataArray.sort((a, b) => a[column] > b[column] ? 1 : -1)
         text += '&#9660'
-
       } else {
         $(this).data('order', "desc")
         dataArray = dataArray.sort((a, b) => a[column] < b[column] ? 1 : -1)
         text += '&#9650'
-
       }
       $(this).html(text)
       buildTable(dataArray)
@@ -103,35 +95,30 @@
         } catch (err) {
           console.log(err.message)
         }
-        const s = document.querySelector("*[name='delete']");
-        s.addEventListener('click', async (e) => {
-          e.preventDefault();
-          var message = prompt("Please enter the reason for cancellation");
-          var id = $("*[name='delete']").attr('id')
-          if (message == null || message == "") {
-
-            return
-          } else {
-            try {
-              const res = await fetch('/cancel/booking', {
-                method: 'POST',
-                body: JSON.stringify({ id, message }),
-                headers: { 'Content-Type': 'application/json' }
-              })
-              dataArray = await res.json();
-              alert(dataArray)
-              //if(!alert(dataArray)){window.location.reload();}
-            } catch (err) {
-              console.log(err.message)
-            }
-          }
-
-        });
       } else {
         alert('Input type date is empty');
       }
     })
 
+    const deleteBooking = async (id) => {
+      var message = prompt("Please enter the reason for cancellation");
+      if (message == null || message == "") {
+        return
+      } else {
+        console.log(id)
+        try {
+          const res = await fetch('/cancel/booking', {
+            method: 'POST',
+            body: JSON.stringify({ id, message }),
+            headers: { 'Content-Type': 'application/json' }
+          })
+          s = await res.json();
+          alert(s)
+        } catch (err) {
+          console.log(err.message)
+        }
+      }
+    }
 
     function buildTable(data) {
       var table = document.getElementById('myTable')
@@ -157,7 +144,7 @@
               <td>${data[i].time}</td>
               <td>
                 <form>
-              <button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}">Cancel</button>
+              <button type="button" name="delete" class="btn btn-danger btn-small" id="${data[i]._id}" onclick="deleteBooking('${data[i]._id}')">Cancel</button>
               </form>
               </td>
 					  </tr>`

@@ -127,7 +127,6 @@ exports.deleteBooking = async (req, res) => {
 exports.cancelBooking = async (req, res) => {
 	const { id, message } = req.body;
 	const booking = await Booking.findById(id);
-	await Booking.findByIdAndDelete(id);
 	const subject = `Booking Cancellation from SFL for ${booking.EquipmentName}`;
 	const newMessage = `<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 	<tbody>
@@ -213,6 +212,7 @@ exports.cancelBooking = async (req, res) => {
 		</tr>
 	</tbody>
 </table>`;
+	await Booking.findByIdAndDelete(id);
 	SendEmailHtml(booking.UserEmail, newMessage, subject)
 	res.json("Cancellation Sucessful");
 }
