@@ -95,13 +95,13 @@ exports.patchApprove = async (req, res) => {
 																			<p style="margin: 0; font-size: 17px; text-align: center; mso-line-height-alt: 18px;">
 																				&nbsp;</p>
 																			<p style="margin: 0; font-size: 17px; text-align: center;">
-																				<strong>Your Registration for SFL
+																				<strong>Your JNWSFL
 																					Registration is
 																					approved!</strong><br><br></p>
 																			<p style="margin: 0; font-size: 17px; text-align: center; mso-line-height-alt: 25.5px;">
 																				<span style="font-size:17px;">Please
 																					check our website to know more about
-																					your perks as a members and also,
+																					your perks as a member and also,
 																					book for an induction training
 																					program from our booking system.
 																					<br>You will get access to machines
