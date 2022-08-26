@@ -71,8 +71,7 @@ exports.deleteBooking = async (req, res) => {
 																<strong>${booking.EquipmentName}</strong></span>
 														</p>
 														<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
-															Equipment Type:
-															<strong>${booking.EquipmentType}</strong><br><span style="font-size:18px;">Time:
+															<span style="font-size:18px;">Time:
 																<strong>${booking.time}</strong></span></p>
 														<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
 															<span style="font-size:18px;">Date:
@@ -183,8 +182,7 @@ exports.cancelBooking = async (req, res) => {
 																<strong>${booking.EquipmentName}</strong></span>
 														</p>
 														<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
-															Equipment Type:
-															<strong>${booking.EquipmentType}</strong><br><span style="font-size:18px;">Time:
+														<span style="font-size:18px;">Time:
 																<strong>${booking.time}</strong></span></p>
 														<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
 															<span style="font-size:18px;">Date:
@@ -570,8 +568,7 @@ exports.equipmentBooking = async (req, res) => {
 																		  <strong>${EquipmentName}</strong></span>
 																  </p>
 																  <p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
-																	  Equipment Type:
-																	  <strong>${EquipmentType}</strong><br><span style="font-size:18px;">Time:
+																	 <span style="font-size:18px;">Time:
 																		  <strong>${time}</strong></span></p>
 																  <p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
 																	  <span style="font-size:18px;">Date:
@@ -757,8 +754,7 @@ exports.equipmentBooking = async (req, res) => {
 																						<strong>${EquipmentName}</strong></span>
 																				</p>
 																				<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
-																					Equipment Type:
-																					<strong>${EquipmentType}</strong><br><span style="font-size:18px;">Time:
+																					<span style="font-size:18px;">Time:
 																						<strong>${time}</strong></span></p>
 																				<p style="margin: 0; font-size: 18px; text-align: center; mso-line-height-alt: 27px;">
 																					<span style="font-size:18px;">Date:
